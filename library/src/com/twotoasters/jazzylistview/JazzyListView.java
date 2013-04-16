@@ -2,7 +2,7 @@ package com.twotoasters.jazzylistview;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Point;
 import android.os.Build;
 import android.util.AttributeSet;
@@ -45,39 +45,30 @@ public class JazzyListView extends ListView implements OnScrollListener {
 	private boolean mIsScrolling = false;
 	private int mFirstVisibleItem = -1;
 	private int mLastVisibleItem = -1;
-	// TODO: make work for VHLF
-	private int mItemWidth;
-	private int mItemHeight;
 
-	// TODO: set transition based on XML
 	public JazzyListView(Context context) {
-		super(context);
-		init();
+		this(context, null);
 	}
 
 	public JazzyListView(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		init();
+		this(context, attrs, 0);
 	}
 
 	public JazzyListView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-		init();
-	}
 
-	private void init() {
 		setOnScrollListener(this);
 
-		Resources res = getResources();
-		//mItemWidth = getScreenDimensions(getContext()).x;
-		//mItemHeight = res.getDimensionPixelSize(R.dimen.item_height);
-		//Log.v("Jazzy", String.format("item size = [w: %d, h: %d]", mItemWidth, mItemHeight));
-	}
-
-	@Override
-	protected void onScrollChanged(int x, int y, int oldX, int oldY) {
-		super.onScrollChanged(x, y, oldX, oldY);
-		//Log.v(TAG, String.format("onScrollChanged() - [x: %d, y: %d, oldX: %d, oldY: %d]", x, y, oldX, oldY));
+		TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.JazzyListView);
+		String strEffect = null;
+		try {
+	        strEffect = a.getString(R.styleable.JazzyListView_effect);
+	        TransitionEffect effect = TransitionEffect.valueOf(strEffect);
+	        setTransitionEffect(effect);
+		} catch (IllegalArgumentException e) {
+			Log.w(TAG, "Invalid jazzy list view transition effect: " + strEffect);
+		}
+        a.recycle();
 	}
 
 	@Override

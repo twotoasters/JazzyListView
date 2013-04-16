@@ -19,7 +19,9 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		mList = (JazzyListView) findViewById(android.R.id.list);
 		mList.setAdapter(new ListAdapter(this));
-		setupJazziness(TransitionEffect.Wave);
+
+		// Initial effect is specified in XML layout
+		//setupJazziness(TransitionEffect.Helix);
 	}
 
 	@Override
