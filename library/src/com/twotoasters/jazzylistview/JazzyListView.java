@@ -93,7 +93,7 @@ public class JazzyListView extends ListView implements OnScrollListener {
 			while(firstVisibleItem + indexAfterFirst < mFirstVisibleItem) {
 				Log.v(TAG, "Scrolled to reveal new item(s) ABOVE");
 				View item = view.getChildAt(indexAfterFirst);
-				doJazziness(item, firstVisibleItem+indexAfterFirst);
+				doJazziness(item, firstVisibleItem+indexAfterFirst, -1);
 				indexAfterFirst++;
 			}
 
@@ -101,7 +101,7 @@ public class JazzyListView extends ListView implements OnScrollListener {
 			while(lastVisibleItem - indexBeforeLast > mLastVisibleItem) {
 				Log.v(TAG, "Scrolled to reveal new item(s) BELOW");
 				View item = view.getChildAt(lastVisibleItem - firstVisibleItem - indexBeforeLast);
-				doJazziness(item, lastVisibleItem);
+				doJazziness(item, lastVisibleItem, 1);
 				indexBeforeLast++;
 			}
 		}
@@ -110,55 +110,62 @@ public class JazzyListView extends ListView implements OnScrollListener {
 		mLastVisibleItem = lastVisibleItem;
 	}
 
+	/**
+	 * Initializes the item view and triggers the animation.
+	 * @param item The view to be animated.
+	 * @param position The index of the view in the list.
+	 * @param scrollDirection Positive number indicating scrolling down, or negative number indicating scrolling up.
+	 */
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-	private void doJazziness(View item, int position) {
+	private void doJazziness(View item, int position, int scrollDirection) {
 		if (mIsScrolling) {
 			ViewPropertyAnimator animator = com.nineoldandroids.view.ViewPropertyAnimator
 					.animate(item)
 					.setDuration(DURATION);
 
-			mItemWidth = item.getWidth();
-			mItemHeight = item.getHeight();
+			int itemWidth = item.getWidth();
+			int itemHeight = item.getHeight();
+			scrollDirection = scrollDirection > 0 ? 1 : -1;
 
 			switch (mEffect) {
 				case Standard:
 					break;
 				case Grow:
-					item.setPivotX(mItemWidth / 2);
-					item.setPivotY(mItemHeight / 2);
-					item.setScaleX(0);
-					item.setScaleY(0);
+					item.setPivotX(itemWidth / 2);
+					item.setPivotY(itemHeight / 2);
+					item.setScaleX(0.01f);
+					item.setScaleY(0.01f);
 					animator.scaleX(1).scaleY(1);
 					break;
 				case Curl:
 					item.setPivotX(0);
-					item.setPivotY(mItemHeight / 2);
+					item.setPivotY(itemHeight / 2);
 					item.setRotationY(90);
 					animator.rotationY(0);
 					break;
 				case Wave:
-					item.setTranslationX(-mItemWidth);
+					item.setTranslationX(-itemWidth);
 					animator.translationX(0);
 					break;
 				case Flip:
-					item.setPivotX(mItemWidth / 2);
-					item.setPivotY(mItemHeight / 2);
-					item.setRotationX(90);
-					animator.rotationX(0);
+					item.setPivotX(itemWidth / 2);
+					item.setPivotY(itemHeight / 2);
+					item.setRotationX(-90 * scrollDirection);
+					animator.rotationXBy(90 * scrollDirection);
 					break;
 				case Helix:
 					item.setRotationY(180);
-					animator.rotationY(0);
+					animator.rotationYBy(180 * scrollDirection);
 					break;
 				case Fan:
 					item.setPivotX(0);
 					item.setPivotY(0);
-					item.setRotation(70);
-					animator.rotationBy(-70);
+					item.setRotation(70 * scrollDirection);
+					animator.rotationBy(-70 * scrollDirection);
 					break;
 				case Zipper:
 					boolean isEven = position % 2 == 0;
-					item.setTranslationX((isEven ? -1 : 1) * mItemWidth);
+					item.setTranslationX((isEven ? -1 : 1) * itemWidth);
 					animator.translationX(0);
 					break;
 				case Fade:
