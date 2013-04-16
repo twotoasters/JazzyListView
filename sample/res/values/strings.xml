@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">JazzyListView</string>
+    
+    <string-array name="jazzy_effects">
+        <item>Standard</item>
+        <item>Grow</item>
+        <item>Curl</item>
+        <item>Wave</item>
+        <item>Flip</item>
+        <item>Helix</item>
+        <item>Fan</item>
+        <item>Zipper</item>
+        <item>Fade</item>
+    </string-array>
+    
+</resources>
