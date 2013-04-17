@@ -64,8 +64,10 @@ public class JazzyListView extends ListView implements OnScrollListener {
 		String strEffect = null;
 		try {
 	        strEffect = a.getString(R.styleable.JazzyListView_effect);
+	        if(strEffect != null) {
 	        TransitionEffect effect = TransitionEffect.valueOf(strEffect);
 	        setTransitionEffect(effect);
+	        }
 		} catch (IllegalArgumentException e) {
 			Log.w(TAG, "Invalid jazzy list view transition effect: " + strEffect);
 		}
