@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
@@ -110,7 +111,8 @@ public class JazzyListView extends ListView implements OnScrollListener {
 		if (mIsScrolling) {
 			ViewPropertyAnimator animator = com.nineoldandroids.view.ViewPropertyAnimator
 					.animate(item)
-					.setDuration(DURATION);
+					.setDuration(DURATION)
+					.setInterpolator(new AccelerateDecelerateInterpolator());
 
 			int itemWidth = item.getWidth();
 			int itemHeight = item.getHeight();
