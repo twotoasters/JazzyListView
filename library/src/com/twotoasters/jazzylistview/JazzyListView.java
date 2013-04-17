@@ -78,8 +78,6 @@ public class JazzyListView extends ListView implements OnScrollListener {
 
 		int lastVisibleItem = firstVisibleItem + visibleItemCount - 1;
 		if (IS_AT_LEAST_HC && mIsScrolling && shouldAnimateItems) {
-			// TODO: make sure no items get skipped when scrolling quickly
-			// TODO: don't animate twice if scroll one direction then the other
 			int indexAfterFirst = 0;
 			while(firstVisibleItem + indexAfterFirst < mFirstVisibleItem) {
 				Log.v(TAG, "Scrolled to reveal new item(s) ABOVE");
