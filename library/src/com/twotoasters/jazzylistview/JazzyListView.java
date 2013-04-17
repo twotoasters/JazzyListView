@@ -16,16 +16,22 @@ import com.nineoldandroids.view.ViewPropertyAnimator;
 
 public class JazzyListView extends ListView implements OnScrollListener {
 
+    // TODO: change types to enum
     public enum TransitionEffect {
         Standard,
         Grow,
+        Cards,
         Curl,
         Wave,
         Flip,
+        Fly,
+        ReverseFly,
         Helix,
         Fan,
+        Tilt,
         Zipper,
-		Fade
+        Fade,
+        Twirl
     }
 
     private static final String TAG = "Jazzy";
@@ -134,6 +140,13 @@ public class JazzyListView extends ListView implements OnScrollListener {
                     item.setScaleY(0.01f);
                     animator.scaleX(1).scaleY(1);
                     break;
+                case Cards:
+                    item.setPivotX(itemWidth / 2);
+                    item.setPivotY(itemHeight / 2);
+                    item.setRotationX(90 * scrollDirection);
+                    item.setTranslationY(itemHeight * scrollDirection);
+                    animator.rotationXBy(-90 * scrollDirection).translationYBy(-itemHeight * scrollDirection);
+                    break;
                 case Curl:
                     item.setPivotX(0);
                     item.setPivotY(itemHeight / 2);
@@ -150,6 +163,20 @@ public class JazzyListView extends ListView implements OnScrollListener {
                     item.setRotationX(-90 * scrollDirection);
                     animator.rotationXBy(90 * scrollDirection);
                     break;
+                case Fly:
+                    item.setPivotX(itemWidth / 2);
+                    item.setPivotY(itemHeight / 2);
+                    item.setRotationX(-135 * scrollDirection);
+                    item.setTranslationY(itemHeight * 2 * scrollDirection);
+                    animator.rotationXBy(135 * scrollDirection).translationYBy(-itemHeight * 2 * scrollDirection);
+                    break;
+                case ReverseFly:
+                    item.setPivotX(itemWidth / 2);
+                    item.setPivotY(itemHeight / 2);
+                    item.setRotationX(135 * scrollDirection);
+                    item.setTranslationY(-itemHeight * 2 * scrollDirection);
+                    animator.rotationXBy(-135 * scrollDirection).translationYBy(itemHeight * 2 * scrollDirection);
+                    break;
                 case Helix:
                     item.setRotationY(180);
                     animator.rotationYBy(180 * scrollDirection);
@@ -160,6 +187,15 @@ public class JazzyListView extends ListView implements OnScrollListener {
                     item.setRotation(70 * scrollDirection);
                     animator.rotationBy(-70 * scrollDirection);
                     break;
+                case Tilt:
+                    item.setPivotX(itemWidth / 2);
+                    item.setPivotY(itemHeight / 2);
+                    item.setScaleX(0.7f);
+                    item.setScaleY(0.7f);
+                    item.setTranslationY(itemHeight / 2 * scrollDirection);
+                    item.setAlpha(OPAQUE / 2);
+                    animator.translationYBy(-itemHeight / 2 * scrollDirection).scaleX(1).scaleY(1).alpha(OPAQUE);
+                    break;
                 case Zipper:
                     boolean isEven = position % 2 == 0;
                     item.setTranslationX((isEven ? -1 : 1) * itemWidth);
@@ -169,6 +205,8 @@ public class JazzyListView extends ListView implements OnScrollListener {
                     item.setAlpha(TRANSPARENT);
                     animator.setDuration(animator.getDuration() * 5);
                     animator.alpha(OPAQUE);
+                    break;
+                case Twirl:
                     break;
                 default:
                     break;

@@ -5,14 +5,19 @@
     
     <string-array name="jazzy_effects">
         <item>Standard</item>
+        <item>Cards</item>
         <item>Grow</item>
         <item>Curl</item>
         <item>Wave</item>
         <item>Flip</item>
+        <item>Fly</item>
+        <item>ReverseFly</item>
         <item>Helix</item>
         <item>Fan</item>
+        <item>Tilt</item>
         <item>Zipper</item>
         <item>Fade</item>
+        <item>Twirl</item>
     </string-array>
     
 </resources>
