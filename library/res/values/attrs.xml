@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="effect" format="string" />
-        
-    <declare-styleable name="JazzyListView">
-        <attr name="effect" />
+    <declare-styleable name="JazzyListView" >
+        <attr name="effect" format="enum" >
+            <enum name="standard" value="0" />
+	        <enum name="cards" value="1" />
+	        <enum name="grow" value="2" />
+	        <enum name="curl" value="3" />
+	        <enum name="wave" value="4" />
+	        <enum name="flip" value="5" />
+	        <enum name="fly" value="6" />
+	        <enum name="reverse_fly" value="7" />
+	        <enum name="helix" value="8" />
+	        <enum name="fan" value="9" />
+	        <enum name="tilt" value="10" />
+	        <enum name="zipper" value="11" />
+	        <enum name="fade" value="12" />
+	        <enum name="twirl" value="13" />
+        </attr>
     </declare-styleable>
 </resources>

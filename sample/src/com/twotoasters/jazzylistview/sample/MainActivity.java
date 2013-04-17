@@ -1,5 +1,7 @@
 package com.twotoasters.jazzylistview.sample;
 
+import java.util.HashMap;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -7,11 +9,11 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.twotoasters.jazzylistview.JazzyListView;
-import com.twotoasters.jazzylistview.JazzyListView.TransitionEffect;
 
 public class MainActivity extends Activity {
 
 	private JazzyListView mList;
+	private HashMap<String, Integer> mEffectMap;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +28,12 @@ public class MainActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+		mEffectMap = new HashMap<String, Integer>();
+		int i = 0;
 		String[] effects = this.getResources().getStringArray(R.array.jazzy_effects);
 		for (String effect : effects) {
 			menu.add(effect);
+			mEffectMap.put(effect, Integer.valueOf(i++));
 		}
 		return true;
 	}
@@ -37,12 +42,11 @@ public class MainActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		String strEffect = item.getTitle().toString();
 		Toast.makeText(this, strEffect, Toast.LENGTH_SHORT).show();
-		TransitionEffect effect = TransitionEffect.valueOf(strEffect);
-		setupJazziness(effect);
+		setupJazziness(mEffectMap.get(strEffect));
 		return true;
 	}
 
-	private void setupJazziness(TransitionEffect effect) {
+	private void setupJazziness(int effect) {
 		mList.setTransitionEffect(effect);
 	}
 }
