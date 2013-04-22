@@ -1,9 +1,7 @@
 package com.twotoasters.jazzylistview;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +10,7 @@ import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
 
+import com.nineoldandroids.view.ViewHelper;
 import com.nineoldandroids.view.ViewPropertyAnimator;
 
 public class JazzyListView extends ListView implements OnScrollListener {
@@ -32,9 +31,6 @@ public class JazzyListView extends ListView implements OnScrollListener {
     public static final int TWIRL = 13;
 
     private static final String TAG = "Jazzy";
-
-    private static final boolean IS_AT_LEAST_HC =
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB;
 
     public static final int DURATION = 600;
     public static final int OPAQUE = 255, TRANSPARENT = 0;
@@ -76,7 +72,7 @@ public class JazzyListView extends ListView implements OnScrollListener {
         boolean shouldAnimateItems = (mFirstVisibleItem != -1 && mLastVisibleItem != -1);
 
         int lastVisibleItem = firstVisibleItem + visibleItemCount - 1;
-        if (IS_AT_LEAST_HC && mIsScrolling && shouldAnimateItems) {
+        if (mIsScrolling && shouldAnimateItems) {
             int indexAfterFirst = 0;
             while (firstVisibleItem + indexAfterFirst < mFirstVisibleItem) {
                 Log.v(TAG, "Scrolled to reveal new item(s) ABOVE");
@@ -106,7 +102,6 @@ public class JazzyListView extends ListView implements OnScrollListener {
      * @param position The index of the view in the list.
      * @param scrollDirection Positive number indicating scrolling down, or negative number indicating scrolling up.
      */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private void doJazziness(View item, int position, int scrollDirection) {
         if (mIsScrolling) {
             ViewPropertyAnimator animator = com.nineoldandroids.view.ViewPropertyAnimator
@@ -122,75 +117,76 @@ public class JazzyListView extends ListView implements OnScrollListener {
                 case STANDARD:
                     break;
                 case GROW:
-                    item.setPivotX(itemWidth / 2);
-                    item.setPivotY(itemHeight / 2);
-                    item.setScaleX(0.01f);
-                    item.setScaleY(0.01f);
+                    ViewHelper.setPivotX(item, itemWidth / 2);
+                    ViewHelper.setPivotY(item, itemHeight / 2);
+                    ViewHelper.setScaleX(item, 0.01f);
+                    ViewHelper.setScaleY(item, 0.01f);
                     animator.scaleX(1).scaleY(1);
                     break;
                 case CARDS:
-                    item.setPivotX(itemWidth / 2);
-                    item.setPivotY(itemHeight / 2);
-                    item.setRotationX(90 * scrollDirection);
-                    item.setTranslationY(itemHeight * scrollDirection);
+
+                    ViewHelper.setPivotX(item, itemWidth / 2);
+                    ViewHelper.setPivotY(item, itemHeight / 2);
+                    ViewHelper.setRotationX(item, 90 * scrollDirection);
+                    ViewHelper.setTranslationY(item, itemHeight * scrollDirection);
                     animator.rotationXBy(-90 * scrollDirection).translationYBy(-itemHeight * scrollDirection);
                     break;
                 case CURL:
-                    item.setPivotX(0);
-                    item.setPivotY(itemHeight / 2);
-                    item.setRotationY(90);
+                    ViewHelper.setPivotX(item, 0);
+                    ViewHelper.setPivotY(item, itemHeight / 2);
+                    ViewHelper.setRotationY(item, 90);
                     animator.rotationY(0);
                     break;
                 case WAVE:
-                    item.setTranslationX(-itemWidth);
+                    ViewHelper.setTranslationX(item, -itemWidth);
                     animator.translationX(0);
                     break;
                 case FLIP:
-                    item.setPivotX(itemWidth / 2);
-                    item.setPivotY(itemHeight / 2);
-                    item.setRotationX(-90 * scrollDirection);
+                    ViewHelper.setPivotX(item, itemWidth / 2);
+                    ViewHelper.setPivotY(item, itemHeight / 2);
+                    ViewHelper.setRotationX(item, -90 * scrollDirection);
                     animator.rotationXBy(90 * scrollDirection);
                     break;
                 case FLY:
-                    item.setPivotX(itemWidth / 2);
-                    item.setPivotY(itemHeight / 2);
-                    item.setRotationX(-135 * scrollDirection);
-                    item.setTranslationY(itemHeight * 2 * scrollDirection);
+                    ViewHelper.setPivotX(item, itemWidth / 2);
+                    ViewHelper.setPivotY(item, itemHeight / 2);
+                    ViewHelper.setRotationX(item, -135 * scrollDirection);
+                    ViewHelper.setTranslationY(item, itemHeight * 2 * scrollDirection);
                     animator.rotationXBy(135 * scrollDirection).translationYBy(-itemHeight * 2 * scrollDirection);
                     break;
                 case REVERSE_FLY:
-                    item.setPivotX(itemWidth / 2);
-                    item.setPivotY(itemHeight / 2);
-                    item.setRotationX(135 * scrollDirection);
-                    item.setTranslationY(-itemHeight * 2 * scrollDirection);
+                    ViewHelper.setPivotX(item, itemWidth / 2);
+                    ViewHelper.setPivotY(item, itemHeight / 2);
+                    ViewHelper.setRotationX(item, 135 * scrollDirection);
+                    ViewHelper.setTranslationY(item, -itemHeight * 2 * scrollDirection);
                     animator.rotationXBy(-135 * scrollDirection).translationYBy(itemHeight * 2 * scrollDirection);
                     break;
                 case HELIX:
-                    item.setRotationY(180);
+                    ViewHelper.setRotationY(item, 180);
                     animator.rotationYBy(180 * scrollDirection);
                     break;
                 case FAN:
-                    item.setPivotX(0);
-                    item.setPivotY(0);
-                    item.setRotation(70 * scrollDirection);
+                    ViewHelper.setPivotX(item, 0);
+                    ViewHelper.setPivotY(item, 0);
+                    ViewHelper.setRotation(item, 70 * scrollDirection);
                     animator.rotationBy(-70 * scrollDirection);
                     break;
                 case TILT:
-                    item.setPivotX(itemWidth / 2);
-                    item.setPivotY(itemHeight / 2);
-                    item.setScaleX(0.7f);
-                    item.setScaleY(0.7f);
-                    item.setTranslationY(itemHeight / 2 * scrollDirection);
-                    item.setAlpha(OPAQUE / 2);
+                    ViewHelper.setPivotX(item, itemWidth / 2);
+                    ViewHelper.setPivotY(item, itemHeight / 2);
+                    ViewHelper.setScaleX(item, 0.7f);
+                    ViewHelper.setScaleY(item, 0.7f);
+                    ViewHelper.setTranslationY(item, itemHeight / 2 * scrollDirection);
+                    ViewHelper.setAlpha(item, OPAQUE / 2);
                     animator.translationYBy(-itemHeight / 2 * scrollDirection).scaleX(1).scaleY(1).alpha(OPAQUE);
                     break;
                 case ZIPPER:
                     boolean isEven = position % 2 == 0;
-                    item.setTranslationX((isEven ? -1 : 1) * itemWidth);
+                    ViewHelper.setTranslationX(item, (isEven ? -1 : 1) * itemWidth);
                     animator.translationX(0);
                     break;
                 case FADE:
-                    item.setAlpha(TRANSPARENT);
+                    ViewHelper.setAlpha(item, TRANSPARENT);
                     animator.setDuration(animator.getDuration() * 5);
                     animator.alpha(OPAQUE);
                     break;
