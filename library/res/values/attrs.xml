@@ -3,8 +3,8 @@
     <declare-styleable name="JazzyListView" >
         <attr name="effect" format="enum" >
             <enum name="standard" value="0" />
-	        <enum name="cards" value="1" />
-	        <enum name="grow" value="2" />
+            <enum name="grow" value="1" />
+            <enum name="cards" value="2" />
 	        <enum name="curl" value="3" />
 	        <enum name="wave" value="4" />
 	        <enum name="flip" value="5" />
