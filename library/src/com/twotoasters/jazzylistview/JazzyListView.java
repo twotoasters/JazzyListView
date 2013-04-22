@@ -10,8 +10,21 @@ import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
 
-import com.nineoldandroids.view.ViewHelper;
 import com.nineoldandroids.view.ViewPropertyAnimator;
+import com.twotoasters.jazzylistview.effects.CardsEffect;
+import com.twotoasters.jazzylistview.effects.CurlEffect;
+import com.twotoasters.jazzylistview.effects.FadeEffect;
+import com.twotoasters.jazzylistview.effects.FanEffect;
+import com.twotoasters.jazzylistview.effects.FlipEffect;
+import com.twotoasters.jazzylistview.effects.FlyEffect;
+import com.twotoasters.jazzylistview.effects.GrowEffect;
+import com.twotoasters.jazzylistview.effects.HelixEffect;
+import com.twotoasters.jazzylistview.effects.ReverseFlyEffect;
+import com.twotoasters.jazzylistview.effects.StandardEffect;
+import com.twotoasters.jazzylistview.effects.TiltEffect;
+import com.twotoasters.jazzylistview.effects.TwirlEffect;
+import com.twotoasters.jazzylistview.effects.WaveEffect;
+import com.twotoasters.jazzylistview.effects.ZipperEffect;
 
 public class JazzyListView extends ListView implements OnScrollListener {
 
@@ -35,7 +48,7 @@ public class JazzyListView extends ListView implements OnScrollListener {
     public static final int DURATION = 600;
     public static final int OPAQUE = 255, TRANSPARENT = 0;
 
-    private int mTransitionEffect = STANDARD;
+    private JazzyEffect mTransitionEffect = null;
     private boolean mIsScrolling = false;
     private int mFirstVisibleItem = -1;
     private int mLastVisibleItem = -1;
@@ -52,12 +65,14 @@ public class JazzyListView extends ListView implements OnScrollListener {
 
     public JazzyListView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-
         super.setOnScrollListener(this); // call super's method to actually register this list as the listener
 
+
         TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.JazzyListView);
-        mTransitionEffect = a.getInteger(R.styleable.JazzyListView_effect, STANDARD);
+        int transitionEffect = a.getInteger(R.styleable.JazzyListView_effect, STANDARD);
         a.recycle();
+
+        setTransitionEffect(transitionEffect);
     }
 
     @Override
@@ -109,93 +124,9 @@ public class JazzyListView extends ListView implements OnScrollListener {
                     .setDuration(DURATION)
                     .setInterpolator(new AccelerateDecelerateInterpolator());
 
-            int itemWidth = item.getWidth();
-            int itemHeight = item.getHeight();
             scrollDirection = scrollDirection > 0 ? 1 : -1;
-
-            switch (mTransitionEffect) {
-                case STANDARD:
-                    break;
-                case GROW:
-                    ViewHelper.setPivotX(item, itemWidth / 2);
-                    ViewHelper.setPivotY(item, itemHeight / 2);
-                    ViewHelper.setScaleX(item, 0.01f);
-                    ViewHelper.setScaleY(item, 0.01f);
-                    animator.scaleX(1).scaleY(1);
-                    break;
-                case CARDS:
-
-                    ViewHelper.setPivotX(item, itemWidth / 2);
-                    ViewHelper.setPivotY(item, itemHeight / 2);
-                    ViewHelper.setRotationX(item, 90 * scrollDirection);
-                    ViewHelper.setTranslationY(item, itemHeight * scrollDirection);
-                    animator.rotationXBy(-90 * scrollDirection).translationYBy(-itemHeight * scrollDirection);
-                    break;
-                case CURL:
-                    ViewHelper.setPivotX(item, 0);
-                    ViewHelper.setPivotY(item, itemHeight / 2);
-                    ViewHelper.setRotationY(item, 90);
-                    animator.rotationY(0);
-                    break;
-                case WAVE:
-                    ViewHelper.setTranslationX(item, -itemWidth);
-                    animator.translationX(0);
-                    break;
-                case FLIP:
-                    ViewHelper.setPivotX(item, itemWidth / 2);
-                    ViewHelper.setPivotY(item, itemHeight / 2);
-                    ViewHelper.setRotationX(item, -90 * scrollDirection);
-                    animator.rotationXBy(90 * scrollDirection);
-                    break;
-                case FLY:
-                    ViewHelper.setPivotX(item, itemWidth / 2);
-                    ViewHelper.setPivotY(item, itemHeight / 2);
-                    ViewHelper.setRotationX(item, -135 * scrollDirection);
-                    ViewHelper.setTranslationY(item, itemHeight * 2 * scrollDirection);
-                    animator.rotationXBy(135 * scrollDirection).translationYBy(-itemHeight * 2 * scrollDirection);
-                    break;
-                case REVERSE_FLY:
-                    ViewHelper.setPivotX(item, itemWidth / 2);
-                    ViewHelper.setPivotY(item, itemHeight / 2);
-                    ViewHelper.setRotationX(item, 135 * scrollDirection);
-                    ViewHelper.setTranslationY(item, -itemHeight * 2 * scrollDirection);
-                    animator.rotationXBy(-135 * scrollDirection).translationYBy(itemHeight * 2 * scrollDirection);
-                    break;
-                case HELIX:
-                    ViewHelper.setRotationY(item, 180);
-                    animator.rotationYBy(180 * scrollDirection);
-                    break;
-                case FAN:
-                    ViewHelper.setPivotX(item, 0);
-                    ViewHelper.setPivotY(item, 0);
-                    ViewHelper.setRotation(item, 70 * scrollDirection);
-                    animator.rotationBy(-70 * scrollDirection);
-                    break;
-                case TILT:
-                    ViewHelper.setPivotX(item, itemWidth / 2);
-                    ViewHelper.setPivotY(item, itemHeight / 2);
-                    ViewHelper.setScaleX(item, 0.7f);
-                    ViewHelper.setScaleY(item, 0.7f);
-                    ViewHelper.setTranslationY(item, itemHeight / 2 * scrollDirection);
-                    ViewHelper.setAlpha(item, OPAQUE / 2);
-                    animator.translationYBy(-itemHeight / 2 * scrollDirection).scaleX(1).scaleY(1).alpha(OPAQUE);
-                    break;
-                case ZIPPER:
-                    boolean isEven = position % 2 == 0;
-                    ViewHelper.setTranslationX(item, (isEven ? -1 : 1) * itemWidth);
-                    animator.translationX(0);
-                    break;
-                case FADE:
-                    ViewHelper.setAlpha(item, TRANSPARENT);
-                    animator.setDuration(animator.getDuration() * 5);
-                    animator.alpha(OPAQUE);
-                    break;
-                case TWIRL:
-                    break;
-                default:
-                    break;
-            }
-
+            mTransitionEffect.initView(item, position, scrollDirection);
+            mTransitionEffect.setupAnimation(item, position, scrollDirection, animator);
             animator.start();
         }
     }
@@ -217,6 +148,26 @@ public class JazzyListView extends ListView implements OnScrollListener {
     }
 
     public void setTransitionEffect(int transitionEffect) {
+        switch (transitionEffect) {
+            case STANDARD: setTransitionEffect(new StandardEffect()); break;
+            case GROW: setTransitionEffect(new GrowEffect()); break;
+            case CARDS: setTransitionEffect(new CardsEffect()); break;
+            case CURL: setTransitionEffect(new CurlEffect()); break;
+            case WAVE: setTransitionEffect(new WaveEffect()); break;
+            case FLIP: setTransitionEffect(new FlipEffect()); break;
+            case FLY: setTransitionEffect(new FlyEffect()); break;
+            case REVERSE_FLY: setTransitionEffect(new ReverseFlyEffect()); break;
+            case HELIX: setTransitionEffect(new HelixEffect()); break;
+            case FAN: setTransitionEffect(new FanEffect()); break;
+            case TILT: setTransitionEffect(new TiltEffect()); break;
+            case ZIPPER: setTransitionEffect(new ZipperEffect()); break;
+            case FADE: setTransitionEffect(new FadeEffect()); break;
+            case TWIRL: setTransitionEffect(new TwirlEffect()); break;
+            default: break;
+        }
+    }
+
+    public void setTransitionEffect(JazzyEffect transitionEffect) {
         mTransitionEffect = transitionEffect;
     }
 
