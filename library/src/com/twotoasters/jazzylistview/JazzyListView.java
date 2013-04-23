@@ -3,7 +3,6 @@ package com.twotoasters.jazzylistview;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AbsListView;
@@ -89,14 +88,12 @@ public class JazzyListView extends ListView implements OnScrollListener {
      */
     @Override
     public final void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-        Log.v(TAG, String.format("onScroll() - [firstVis: %d, visItemCount: %d, totItemCount: %d]", firstVisibleItem, visibleItemCount, totalItemCount));
         boolean shouldAnimateItems = (mFirstVisibleItem != -1 && mLastVisibleItem != -1);
 
         int lastVisibleItem = firstVisibleItem + visibleItemCount - 1;
         if (mIsScrolling && shouldAnimateItems) {
             int indexAfterFirst = 0;
             while (firstVisibleItem + indexAfterFirst < mFirstVisibleItem) {
-                Log.v(TAG, "Scrolled to reveal new item(s) ABOVE");
                 View item = view.getChildAt(indexAfterFirst);
                 doJazziness(item, firstVisibleItem + indexAfterFirst, -1);
                 indexAfterFirst++;
@@ -104,7 +101,6 @@ public class JazzyListView extends ListView implements OnScrollListener {
 
             int indexBeforeLast = 0;
             while (lastVisibleItem - indexBeforeLast > mLastVisibleItem) {
-                Log.v(TAG, "Scrolled to reveal new item(s) BELOW");
                 View item = view.getChildAt(lastVisibleItem - firstVisibleItem - indexBeforeLast);
                 doJazziness(item, lastVisibleItem, 1);
                 indexBeforeLast++;
@@ -153,8 +149,6 @@ public class JazzyListView extends ListView implements OnScrollListener {
                 break;
             default: break;
         }
-
-        Log.v(TAG, String.format("isScrolling: %s", Boolean.valueOf(mIsScrolling)));
     }
 
     /**
