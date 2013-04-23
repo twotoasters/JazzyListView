@@ -42,8 +42,6 @@ public class JazzyListView extends ListView implements OnScrollListener {
     public static final int FADE = 12;
     public static final int TWIRL = 13;
 
-    private static final String TAG = "Jazzy";
-
     public static final int DURATION = 600;
     public static final int OPAQUE = 255, TRANSPARENT = 0;
 
