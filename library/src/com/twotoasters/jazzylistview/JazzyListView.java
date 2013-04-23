@@ -1,5 +1,7 @@
 package com.twotoasters.jazzylistview;
 
+import java.util.HashSet;
+
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
@@ -52,6 +54,9 @@ public class JazzyListView extends ListView implements OnScrollListener {
 
     private OnScrollListener mAdditionalOnScrollListener;
 
+    private boolean mOnlyAnimateNewItems;
+    private HashSet<Integer> mAlreadyAnimatedItems;
+
     public JazzyListView(Context context) {
         this(context, null);
     }
@@ -63,10 +68,11 @@ public class JazzyListView extends ListView implements OnScrollListener {
     public JazzyListView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         super.setOnScrollListener(this); // call super's method to actually register this list as the listener
-
+        mAlreadyAnimatedItems = new HashSet<Integer>();
 
         TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.JazzyListView);
         int transitionEffect = a.getInteger(R.styleable.JazzyListView_effect, STANDARD);
+        mOnlyAnimateNewItems = a.getBoolean(R.styleable.JazzyListView_only_animate_new_items, false);
         a.recycle();
 
         setTransitionEffect(transitionEffect);
@@ -103,6 +109,10 @@ public class JazzyListView extends ListView implements OnScrollListener {
                 doJazziness(item, lastVisibleItem, 1);
                 indexBeforeLast++;
             }
+        } else if (!shouldAnimateItems) {
+            for (int i = firstVisibleItem; i < visibleItemCount; i++) {
+                mAlreadyAnimatedItems.add(Integer.valueOf(i));
+            }
         }
 
         mFirstVisibleItem = firstVisibleItem;
@@ -120,6 +130,10 @@ public class JazzyListView extends ListView implements OnScrollListener {
      */
     private void doJazziness(View item, int position, int scrollDirection) {
         if (mIsScrolling) {
+            if (mOnlyAnimateNewItems && mAlreadyAnimatedItems.contains(position)) {
+                return;
+            }
+
             ViewPropertyAnimator animator = com.nineoldandroids.view.ViewPropertyAnimator
                     .animate(item)
                     .setDuration(DURATION)
@@ -129,6 +143,8 @@ public class JazzyListView extends ListView implements OnScrollListener {
             mTransitionEffect.initView(item, position, scrollDirection);
             mTransitionEffect.setupAnimation(item, position, scrollDirection, animator);
             animator.start();
+
+            mAlreadyAnimatedItems.add(Integer.valueOf(position));
         }
     }
 
@@ -181,6 +197,15 @@ public class JazzyListView extends ListView implements OnScrollListener {
      */
     public void setTransitionEffect(JazzyEffect transitionEffect) {
         mTransitionEffect = transitionEffect;
+    }
+
+    /**
+     * Sets whether new items or all items should be animated when they become visible.
+     *
+     * @param onlyAnimateNew True if only new items should be animated; false otherwise.
+     */
+    public void setShouldOnlyAnimateNewItems(boolean onlyAnimateNew) {
+        mOnlyAnimateNewItems = onlyAnimateNew;
     }
 
     /**

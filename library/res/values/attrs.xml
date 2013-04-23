@@ -17,5 +17,6 @@
 	        <enum name="fade" value="12" />
 	        <enum name="twirl" value="13" />
         </attr>
+        <attr name="only_animate_new_items" format="boolean" />
     </declare-styleable>
 </resources>
