@@ -75,12 +75,18 @@ public class JazzyListView extends ListView implements OnScrollListener {
         setTransitionEffect(transitionEffect);
     }
 
+    /**
+     * @see AbsListView#setOnScrollListener
+     */
     @Override
     public final void setOnScrollListener(OnScrollListener l) {
         // hijack the scroll listener setter and have this list also notify the additional listener
         mAdditionalOnScrollListener = l;
     }
 
+    /**
+     * @see AbsListView.OnScrollListener#onScroll
+     */
     @Override
     public final void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         Log.v(TAG, String.format("onScroll() - [firstVis: %d, visItemCount: %d, totItemCount: %d]", firstVisibleItem, visibleItemCount, totalItemCount));
@@ -113,6 +119,7 @@ public class JazzyListView extends ListView implements OnScrollListener {
 
     /**
      * Initializes the item view and triggers the animation.
+     *
      * @param item The view to be animated.
      * @param position The index of the view in the list.
      * @param scrollDirection Positive number indicating scrolling down, or negative number indicating scrolling up.
@@ -131,6 +138,9 @@ public class JazzyListView extends ListView implements OnScrollListener {
         }
     }
 
+    /**
+     * @see AbsListView#onScrollStateChanged
+     */
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
         switch(scrollState) {
@@ -147,6 +157,11 @@ public class JazzyListView extends ListView implements OnScrollListener {
         Log.v(TAG, String.format("isScrolling: %s", Boolean.valueOf(mIsScrolling)));
     }
 
+    /**
+     * Sets the desired transition effect.
+     *
+     * @param transitionEffect Numeric constant representing a bundled transition effect.
+     */
     public void setTransitionEffect(int transitionEffect) {
         switch (transitionEffect) {
             case STANDARD: setTransitionEffect(new StandardEffect()); break;
@@ -167,10 +182,18 @@ public class JazzyListView extends ListView implements OnScrollListener {
         }
     }
 
+    /**
+     * Sets the desired transition effect.
+     *
+     * @param transitionEffect The non-bundled transition provided by the client.
+     */
     public void setTransitionEffect(JazzyEffect transitionEffect) {
         mTransitionEffect = transitionEffect;
     }
 
+    /**
+     * Notifies the OnScrollListener of an onScroll event, since JazzyListView is the primary listener for onScroll events.
+     */
     private void notifyAdditionalScrollListener(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         if (mAdditionalOnScrollListener != null) {
             mAdditionalOnScrollListener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
