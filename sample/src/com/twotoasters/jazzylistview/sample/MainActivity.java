@@ -12,8 +12,11 @@ import com.twotoasters.jazzylistview.JazzyListView;
 
 public class MainActivity extends Activity {
 
+    private static final String KEY_TRANSITION_EFFECT = "transition_effect";
+
     private JazzyListView mList;
     private HashMap<String, Integer> mEffectMap;
+    private int mCurrentTransitionEffect = JazzyListView.HELIX;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +25,13 @@ public class MainActivity extends Activity {
         mList = (JazzyListView) findViewById(android.R.id.list);
         mList.setAdapter(new ListAdapter(this));
 
-        // Initial effect is specified in XML layout
-        // setupJazziness(TransitionEffect.Helix);
+        if (savedInstanceState == null) {
+            // Initial effect is specified in XML layout
+            // setupJazziness(TransitionEffect.Helix);
+        } else {
+            mCurrentTransitionEffect = savedInstanceState.getInt(KEY_TRANSITION_EFFECT, JazzyListView.HELIX);
+            setupJazziness(mCurrentTransitionEffect);
+        }
     }
 
     @Override
@@ -46,7 +54,14 @@ public class MainActivity extends Activity {
         return true;
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(KEY_TRANSITION_EFFECT, mCurrentTransitionEffect);
+    }
+
     private void setupJazziness(int effect) {
-        mList.setTransitionEffect(effect);
+        mCurrentTransitionEffect = effect;
+        mList.setTransitionEffect(mCurrentTransitionEffect);
     }
 }
