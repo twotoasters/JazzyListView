@@ -10,42 +10,42 @@ import android.widget.TextView;
 
 public class ListAdapter extends ArrayAdapter<String> {
 
-	public static final int DURATION = 600;
-	public static final int OPAQUE = 255, TRANSPARENT = 0;
+    public static final int DURATION = 600;
+    public static final int OPAQUE = 255, TRANSPARENT = 0;
 
-	private LayoutInflater inflater;
-	private Resources res;
+    private LayoutInflater inflater;
+    private Resources res;
 
-	public ListAdapter(Context context) {
-		super(context, R.layout.item, R.id.text, ListModel.getModel());
-		inflater = LayoutInflater.from(context);
-		res = context.getResources();
-	}
+    public ListAdapter(Context context) {
+        super(context, R.layout.item, R.id.text, ListModel.getModel());
+        inflater = LayoutInflater.from(context);
+        res = context.getResources();
+    }
 
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		ViewHolder holder = null;
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder = null;
 
-		if (convertView == null) {
-			convertView = inflater.inflate(R.layout.item, null);
-			holder = new ViewHolder(convertView);
-			convertView.setTag(holder);
-		} else {
-			holder = (ViewHolder) convertView.getTag();
-		}
+        if (convertView == null) {
+            convertView = inflater.inflate(R.layout.item, null);
+            holder = new ViewHolder(convertView);
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
+        }
 
-		int colorResId = position % 2 == 0 ? R.color.even : R.color.odd;
-		holder.text.setBackgroundColor(res.getColor(colorResId));
-		holder.text.setText(ListModel.getModelItem(position));
+        int colorResId = position % 2 == 0 ? R.color.even : R.color.odd;
+        holder.text.setBackgroundColor(res.getColor(colorResId));
+        holder.text.setText(ListModel.getModelItem(position));
 
-		return convertView;
-	}
+        return convertView;
+    }
 
-	static class ViewHolder {
-		TextView text;
+    static class ViewHolder {
+        TextView text;
 
-		ViewHolder(View view) {
-			text = (TextView) view.findViewById(R.id.text);
-		}
-	}
+        ViewHolder(View view) {
+            text = (TextView) view.findViewById(R.id.text);
+        }
+    }
 }
