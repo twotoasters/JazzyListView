@@ -8,12 +8,14 @@ import com.twotoasters.jazzylistview.JazzyEffect;
 
 public class GrowEffect implements JazzyEffect {
 
+    private static final float INITIAL_SCALE_FACTOR = 0.01f;
+
     @Override
     public void initView(View item, int position, int scrollDirection) {
         ViewHelper.setPivotX(item, item.getWidth() / 2);
         ViewHelper.setPivotY(item, item.getHeight() / 2);
-        ViewHelper.setScaleX(item, 0.01f);
-        ViewHelper.setScaleY(item, 0.01f);
+        ViewHelper.setScaleX(item, INITIAL_SCALE_FACTOR);
+        ViewHelper.setScaleY(item, INITIAL_SCALE_FACTOR);
     }
 
     @Override

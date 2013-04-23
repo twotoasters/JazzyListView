@@ -9,12 +9,14 @@ import com.twotoasters.jazzylistview.JazzyListView;
 
 public class TiltEffect implements JazzyEffect {
 
+    private static final float INITIAL_SCALE_FACTOR = 0.7f;
+
     @Override
     public void initView(View item, int position, int scrollDirection) {
         ViewHelper.setPivotX(item, item.getWidth() / 2);
         ViewHelper.setPivotY(item, item.getHeight() / 2);
-        ViewHelper.setScaleX(item, 0.7f);
-        ViewHelper.setScaleY(item, 0.7f);
+        ViewHelper.setScaleX(item, INITIAL_SCALE_FACTOR);
+        ViewHelper.setScaleY(item, INITIAL_SCALE_FACTOR);
         ViewHelper.setTranslationY(item, item.getHeight() / 2 * scrollDirection);
         ViewHelper.setAlpha(item, JazzyListView.OPAQUE / 2);
     }

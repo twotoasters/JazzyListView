@@ -8,17 +8,19 @@ import com.twotoasters.jazzylistview.JazzyEffect;
 
 public class FlyEffect implements JazzyEffect {
 
+    private static final int INITIAL_ROTATION_ANGLE = 135;
+
     @Override
     public void initView(View item, int position, int scrollDirection) {
         ViewHelper.setPivotX(item, item.getWidth() / 2);
         ViewHelper.setPivotY(item, item.getHeight() / 2);
-        ViewHelper.setRotationX(item, -135 * scrollDirection);
+        ViewHelper.setRotationX(item, -INITIAL_ROTATION_ANGLE * scrollDirection);
         ViewHelper.setTranslationY(item, item.getHeight() * 2 * scrollDirection);
     }
 
     @Override
     public void setupAnimation(View item, int position, int scrollDirection, ViewPropertyAnimator animator) {
-        animator.rotationXBy(135 * scrollDirection).translationYBy(-item.getHeight() * 2 * scrollDirection);
+        animator.rotationXBy(INITIAL_ROTATION_ANGLE * scrollDirection).translationYBy(-item.getHeight() * 2 * scrollDirection);
     }
 
 }
