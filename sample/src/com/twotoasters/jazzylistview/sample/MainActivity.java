@@ -1,6 +1,10 @@
 package com.twotoasters.jazzylistview.sample;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -40,9 +44,17 @@ public class MainActivity extends Activity {
         int i = 0;
         String[] effects = this.getResources().getStringArray(R.array.jazzy_effects);
         for (String effect : effects) {
-            menu.add(effect);
             mEffectMap.put(effect, Integer.valueOf(i++));
         }
+
+        List<String> effectList = new ArrayList<String>(Arrays.asList(effects));
+        Collections.sort(effectList);
+        effectList.remove(getString(R.string.standard));
+        effectList.add(0, getString(R.string.standard));
+        for (String effect : effectList) {
+            menu.add(effect);
+        }
+
         return true;
     }
 
