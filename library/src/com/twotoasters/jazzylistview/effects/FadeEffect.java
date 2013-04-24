@@ -18,7 +18,7 @@ public class FadeEffect implements JazzyEffect {
 
     @Override
     public void setupAnimation(View item, int position, int scrollDirection, ViewPropertyAnimator animator) {
-        animator.setDuration(animator.getDuration() * JazzyListView.DURATION * DURATION_MULTIPLIER);
+        animator.setDuration(JazzyListView.DURATION * DURATION_MULTIPLIER);
         animator.alpha(JazzyListView.OPAQUE);
     }
 
