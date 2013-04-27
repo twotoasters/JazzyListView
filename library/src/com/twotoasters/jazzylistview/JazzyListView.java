@@ -21,6 +21,7 @@ import com.twotoasters.jazzylistview.effects.FlyEffect;
 import com.twotoasters.jazzylistview.effects.GrowEffect;
 import com.twotoasters.jazzylistview.effects.HelixEffect;
 import com.twotoasters.jazzylistview.effects.ReverseFlyEffect;
+import com.twotoasters.jazzylistview.effects.SlideInEffect;
 import com.twotoasters.jazzylistview.effects.StandardEffect;
 import com.twotoasters.jazzylistview.effects.TiltEffect;
 import com.twotoasters.jazzylistview.effects.TwirlEffect;
@@ -43,6 +44,7 @@ public class JazzyListView extends ListView implements OnScrollListener {
     public static final int ZIPPER = 11;
     public static final int FADE = 12;
     public static final int TWIRL = 13;
+    public static final int SLIDE_IN = 14;
 
     public static final int DURATION = 600;
     public static final int OPAQUE = 255, TRANSPARENT = 0;
@@ -186,6 +188,7 @@ public class JazzyListView extends ListView implements OnScrollListener {
             case ZIPPER: setTransitionEffect(new ZipperEffect()); break;
             case FADE: setTransitionEffect(new FadeEffect()); break;
             case TWIRL: setTransitionEffect(new TwirlEffect()); break;
+            case SLIDE_IN: setTransitionEffect(new SlideInEffect()); break;
             default: break;
         }
     }
