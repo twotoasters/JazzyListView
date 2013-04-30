@@ -7,8 +7,8 @@
     
     <string-array name="jazzy_effects">
         <item>@string/standard</item>
-        <item>Cards</item>
         <item>Grow</item>
+        <item>Cards</item>
         <item>Curl</item>
         <item>Wave</item>
         <item>Flip</item>
@@ -20,6 +20,7 @@
         <item>Zipper</item>
         <item>Fade</item>
         <item>Twirl</item>
+        <item>SlideIn</item>
     </string-array>
     
 </resources>

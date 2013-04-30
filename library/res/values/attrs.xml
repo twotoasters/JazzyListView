@@ -16,6 +16,7 @@
 	        <enum name="zipper" value="11" />
 	        <enum name="fade" value="12" />
 	        <enum name="twirl" value="13" />
+	        <enum name="slide_in" value="14" />
         </attr>
         
         <attr name="only_animate_new_items" format="boolean" />
