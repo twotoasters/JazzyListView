@@ -2,22 +2,21 @@ package com.twotoasters.jazzylistview;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.AbsListView;
-import android.widget.ListView;
+import android.widget.GridView;
 
-public class JazzyListView extends ListView {
+public class JazzyGridView extends GridView {
 
     private final JazzyHelper mHelper;
 
-    public JazzyListView(Context context) {
+    public JazzyGridView(Context context) {
         this(context, null);
     }
 
-    public JazzyListView(Context context, AttributeSet attrs) {
+    public JazzyGridView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public JazzyListView(Context context, AttributeSet attrs, int defStyle) {
+    public JazzyGridView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
         mHelper = new JazzyHelper(context, attrs, defStyle);
@@ -25,7 +24,7 @@ public class JazzyListView extends ListView {
     }
 
     /**
-     * @see AbsListView#setOnScrollListener
+     * @see android.widget.AbsListView#setOnScrollListener
      */
     @Override
     public final void setOnScrollListener(OnScrollListener l) {
