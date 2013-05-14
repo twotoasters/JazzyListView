@@ -4,7 +4,9 @@
     <string name="app_name">JazzyListView</string>
     
     <string name="standard">Standard</string>
-    
+    <string name="simple_list_example">Simple List Example</string>
+    <string name="simple_grid_example">Simple Grid Example</string>
+
     <string-array name="jazzy_effects">
         <item>@string/standard</item>
         <item>Grow</item>
