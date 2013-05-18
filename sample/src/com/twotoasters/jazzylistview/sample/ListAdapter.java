@@ -8,11 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class ListAdapter extends ArrayAdapter<String> {
+class ListAdapter extends ArrayAdapter<String> {
 
-    private LayoutInflater inflater;
-    private Resources res;
-    private int itemLayout;
+    private final LayoutInflater inflater;
+    private final Resources res;
+    private final int itemLayout;
 
     public ListAdapter(Context context, int itemLayout) {
         super(context, itemLayout, R.id.text, ListModel.getModel());
@@ -41,7 +41,7 @@ public class ListAdapter extends ArrayAdapter<String> {
     }
 
     static class ViewHolder {
-        TextView text;
+        final TextView text;
 
         ViewHolder(View view) {
             text = (TextView) view.findViewById(R.id.text);

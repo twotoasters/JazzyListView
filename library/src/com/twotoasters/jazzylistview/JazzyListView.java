@@ -2,7 +2,6 @@ package com.twotoasters.jazzylistview;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.AbsListView;
 import android.widget.ListView;
 
 public class JazzyListView extends ListView {
@@ -20,7 +19,7 @@ public class JazzyListView extends ListView {
     public JazzyListView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        mHelper = new JazzyHelper(context, attrs, defStyle);
+        mHelper = new JazzyHelper(context, attrs);
         super.setOnScrollListener(mHelper);
     }
 

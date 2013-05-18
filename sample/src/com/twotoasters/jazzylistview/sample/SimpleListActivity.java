@@ -8,7 +8,11 @@ import android.widget.Toast;
 import com.twotoasters.jazzylistview.JazzyHelper;
 import com.twotoasters.jazzylistview.JazzyListView;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 
 public class SimpleListActivity extends Activity {
 
@@ -25,7 +29,7 @@ public class SimpleListActivity extends Activity {
         mList = (JazzyListView) findViewById(android.R.id.list);
         mList.setAdapter(new ListAdapter(this, R.layout.item));
 
-        if (savedInstanceState != null){
+        if (savedInstanceState != null) {
             mCurrentTransitionEffect = savedInstanceState.getInt(KEY_TRANSITION_EFFECT, JazzyHelper.HELIX);
             setupJazziness(mCurrentTransitionEffect);
         }

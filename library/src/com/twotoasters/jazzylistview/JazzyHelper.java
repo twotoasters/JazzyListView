@@ -7,7 +7,21 @@ import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AbsListView;
 import com.nineoldandroids.view.ViewPropertyAnimator;
-import com.twotoasters.jazzylistview.effects.*;
+import com.twotoasters.jazzylistview.effects.CardsEffect;
+import com.twotoasters.jazzylistview.effects.CurlEffect;
+import com.twotoasters.jazzylistview.effects.FadeEffect;
+import com.twotoasters.jazzylistview.effects.FanEffect;
+import com.twotoasters.jazzylistview.effects.FlipEffect;
+import com.twotoasters.jazzylistview.effects.FlyEffect;
+import com.twotoasters.jazzylistview.effects.GrowEffect;
+import com.twotoasters.jazzylistview.effects.HelixEffect;
+import com.twotoasters.jazzylistview.effects.ReverseFlyEffect;
+import com.twotoasters.jazzylistview.effects.SlideInEffect;
+import com.twotoasters.jazzylistview.effects.StandardEffect;
+import com.twotoasters.jazzylistview.effects.TiltEffect;
+import com.twotoasters.jazzylistview.effects.TwirlEffect;
+import com.twotoasters.jazzylistview.effects.WaveEffect;
+import com.twotoasters.jazzylistview.effects.ZipperEffect;
 
 import java.util.HashSet;
 
@@ -40,9 +54,9 @@ public class JazzyHelper implements AbsListView.OnScrollListener {
     private AbsListView.OnScrollListener mAdditionalOnScrollListener;
 
     private boolean mOnlyAnimateNewItems;
-    private HashSet<Integer> mAlreadyAnimatedItems;
+    private final HashSet<Integer> mAlreadyAnimatedItems;
 
-    public JazzyHelper(Context context, AttributeSet attrs, int defStyle) {
+    public JazzyHelper(Context context, AttributeSet attrs) {
 
         mAlreadyAnimatedItems = new HashSet<Integer>();
 

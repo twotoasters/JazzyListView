@@ -8,7 +8,11 @@ import android.widget.Toast;
 import com.twotoasters.jazzylistview.JazzyGridView;
 import com.twotoasters.jazzylistview.JazzyHelper;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 
 public class SimpleGridActivity extends Activity {
 

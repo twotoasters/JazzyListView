@@ -13,7 +13,7 @@ import java.util.List;
 
 public class MainActivity extends ListActivity {
 
-    private List<ActivityInfo> activitiesInfo = Arrays.asList(
+    private final List<ActivityInfo> activitiesInfo = Arrays.asList(
             new ActivityInfo(SimpleListActivity.class, R.string.simple_list_example),
             new ActivityInfo(SimpleGridActivity.class, R.string.simple_grid_example));
 
@@ -27,8 +27,8 @@ public class MainActivity extends ListActivity {
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
-        Class<? extends Activity> class_ = activitiesInfo.get(position).activityClass;
-        Intent intent = new Intent(this, class_);
+        Class<? extends Activity> clazz = activitiesInfo.get(position).activityClass;
+        Intent intent = new Intent(this, clazz);
         startActivity(intent);
     }
 
