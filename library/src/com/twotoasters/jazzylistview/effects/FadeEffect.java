@@ -1,11 +1,10 @@
 package com.twotoasters.jazzylistview.effects;
 
 import android.view.View;
-
 import com.nineoldandroids.view.ViewHelper;
 import com.nineoldandroids.view.ViewPropertyAnimator;
 import com.twotoasters.jazzylistview.JazzyEffect;
-import com.twotoasters.jazzylistview.JazzyListView;
+import com.twotoasters.jazzylistview.JazzyHelper;
 
 public class FadeEffect implements JazzyEffect {
 
@@ -13,13 +12,13 @@ public class FadeEffect implements JazzyEffect {
 
     @Override
     public void initView(View item, int position, int scrollDirection) {
-        ViewHelper.setAlpha(item, JazzyListView.TRANSPARENT);
+        ViewHelper.setAlpha(item, JazzyHelper.TRANSPARENT);
     }
 
     @Override
     public void setupAnimation(View item, int position, int scrollDirection, ViewPropertyAnimator animator) {
-        animator.setDuration(JazzyListView.DURATION * DURATION_MULTIPLIER);
-        animator.alpha(JazzyListView.OPAQUE);
+        animator.setDuration(JazzyHelper.DURATION * DURATION_MULTIPLIER);
+        animator.alpha(JazzyHelper.OPAQUE);
     }
 
 }

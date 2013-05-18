@@ -8,26 +8,25 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class ListAdapter extends ArrayAdapter<String> {
+class ListAdapter extends ArrayAdapter<String> {
 
-    public static final int DURATION = 600;
-    public static final int OPAQUE = 255, TRANSPARENT = 0;
+    private final LayoutInflater inflater;
+    private final Resources res;
+    private final int itemLayout;
 
-    private LayoutInflater inflater;
-    private Resources res;
-
-    public ListAdapter(Context context) {
-        super(context, R.layout.item, R.id.text, ListModel.getModel());
+    public ListAdapter(Context context, int itemLayout) {
+        super(context, itemLayout, R.id.text, ListModel.getModel());
         inflater = LayoutInflater.from(context);
         res = context.getResources();
+        this.itemLayout = itemLayout;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder = null;
+        ViewHolder holder;
 
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.item, null);
+            convertView = inflater.inflate(itemLayout, null);
             holder = new ViewHolder(convertView);
             convertView.setTag(holder);
         } else {
@@ -42,7 +41,7 @@ public class ListAdapter extends ArrayAdapter<String> {
     }
 
     static class ViewHolder {
-        TextView text;
+        final TextView text;
 
         ViewHolder(View view) {
             text = (TextView) view.findViewById(R.id.text);
