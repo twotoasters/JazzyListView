@@ -92,7 +92,7 @@ public class JazzyHelper implements AbsListView.OnScrollListener {
             int indexBeforeLast = 0;
             while (lastVisibleItem - indexBeforeLast > mLastVisibleItem) {
                 View item = view.getChildAt(lastVisibleItem - firstVisibleItem - indexBeforeLast);
-                doJazziness(item, lastVisibleItem, 1);
+                doJazziness(item, lastVisibleItem - indexBeforeLast, 1);
                 indexBeforeLast++;
             }
         } else if (!shouldAnimateItems) {
