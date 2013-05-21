@@ -1,6 +1,6 @@
 package com.twotoasters.jazzylistview.sample;
 
-public class ListModel {
+final class ListModel {
 
     private static final String[] MODEL = {
         "Zero",

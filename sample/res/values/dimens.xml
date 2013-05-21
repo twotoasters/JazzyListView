@@ -1,3 +1,4 @@
 <resources>
     <dimen name="item_height">48dp</dimen>
+    <dimen name="grid_item_height">150dp</dimen>
 </resources>
