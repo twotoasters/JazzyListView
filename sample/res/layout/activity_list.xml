@@ -12,6 +12,8 @@
         android:layout_height="wrap_content"
         android:divider="@null"
         app:effect="helix"
-        app:only_animate_new_items="false" />
+        app:only_animate_new_items="false"
+        app:only_animate_fling="false"
+        app:max_velocity="0" />
     
 </FrameLayout>

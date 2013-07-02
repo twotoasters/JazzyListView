@@ -1,11 +1,14 @@
 package com.twotoasters.jazzylistview;
 
+import java.util.HashSet;
+
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AbsListView;
+
 import com.nineoldandroids.view.ViewPropertyAnimator;
 import com.twotoasters.jazzylistview.effects.CardsEffect;
 import com.twotoasters.jazzylistview.effects.CurlEffect;
@@ -22,8 +25,6 @@ import com.twotoasters.jazzylistview.effects.TiltEffect;
 import com.twotoasters.jazzylistview.effects.TwirlEffect;
 import com.twotoasters.jazzylistview.effects.WaveEffect;
 import com.twotoasters.jazzylistview.effects.ZipperEffect;
-
-import java.util.HashSet;
 
 public class JazzyHelper implements AbsListView.OnScrollListener {
 
@@ -50,10 +51,18 @@ public class JazzyHelper implements AbsListView.OnScrollListener {
     private boolean mIsScrolling = false;
     private int mFirstVisibleItem = -1;
     private int mLastVisibleItem = -1;
+    
+	private int mPreviousFirstVisibleItem = 0;
+	private long mPreviousEventTime = 0;
+	private double mSpeed = 0;
+	private int mMaxVelocity = 0;
+	public int MAX_VELOCITY_OFF = 0;
 
     private AbsListView.OnScrollListener mAdditionalOnScrollListener;
 
     private boolean mOnlyAnimateNewItems;
+	private boolean mOnlyAnimateOnFling;
+	private boolean mIsFlingEvent;
     private final HashSet<Integer> mAlreadyAnimatedItems;
 
     public JazzyHelper(Context context, AttributeSet attrs) {
@@ -62,10 +71,13 @@ public class JazzyHelper implements AbsListView.OnScrollListener {
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.JazzyListView);
         int transitionEffect = a.getInteger(R.styleable.JazzyListView_effect, STANDARD);
+        int maxVelocity = a.getInteger(R.styleable.JazzyListView_max_velocity, MAX_VELOCITY_OFF);
         mOnlyAnimateNewItems = a.getBoolean(R.styleable.JazzyListView_only_animate_new_items, false);
+        mOnlyAnimateOnFling = a.getBoolean(R.styleable.JazzyListView_max_velocity, false);
         a.recycle();
 
         setTransitionEffect(transitionEffect);
+        setMaxAnimationVelocity(maxVelocity);
     }
 
     public void setOnScrollListener(AbsListView.OnScrollListener l) {
@@ -82,6 +94,7 @@ public class JazzyHelper implements AbsListView.OnScrollListener {
 
         int lastVisibleItem = firstVisibleItem + visibleItemCount - 1;
         if (mIsScrolling && shouldAnimateItems) {
+			setVelocity(firstVisibleItem, totalItemCount);
             int indexAfterFirst = 0;
             while (firstVisibleItem + indexAfterFirst < mFirstVisibleItem) {
                 View item = view.getChildAt(indexAfterFirst);
@@ -107,6 +120,45 @@ public class JazzyHelper implements AbsListView.OnScrollListener {
         notifyAdditionalScrollListener(view, firstVisibleItem, visibleItemCount, totalItemCount);
     }
 
+	/**
+	 * Should be called in onScroll to keep take of current Velocity
+	 * 
+	 * @param firstVisibleItem
+	 *            The index of the first visible item in the ListView.
+	 */
+	private void setVelocity(int firstVisibleItem, int totalItemCount) {
+		if(mMaxVelocity > MAX_VELOCITY_OFF && mPreviousFirstVisibleItem != firstVisibleItem) {
+			long currTime = System.currentTimeMillis();
+			long timeToScrollOneItem = currTime - mPreviousEventTime;
+			if(timeToScrollOneItem < 1) {
+				double newSpeed = (((double)1 / timeToScrollOneItem) * 1000);
+				// We need to normalize velocity so different size item don't 
+				// give largely different velocities.
+				if(newSpeed < (0.9f * mSpeed)) {
+					mSpeed *= 0.9f;
+				} else if(newSpeed > (1.1f * mSpeed)) {
+					mSpeed *= 1.1f;
+				} else {
+					mSpeed = newSpeed;
+				}
+			} else {
+				mSpeed = (((double)1 / timeToScrollOneItem) * 1000);
+			}
+
+			mPreviousFirstVisibleItem = firstVisibleItem;
+			mPreviousEventTime = currTime;
+		}
+	}
+
+	/**
+	 * 
+	 * @return Returns the current Velocity of the ListView's scrolling in items
+	 *         per second.
+	 */
+	private double getVelocity() {
+		return mSpeed;
+	}
+
     /**
      * Initializes the item view and triggers the animation.
      *
@@ -116,9 +168,14 @@ public class JazzyHelper implements AbsListView.OnScrollListener {
      */
     private void doJazziness(View item, int position, int scrollDirection) {
         if (mIsScrolling) {
-            if (mOnlyAnimateNewItems && mAlreadyAnimatedItems.contains(position)) {
+            if (mOnlyAnimateNewItems && mAlreadyAnimatedItems.contains(position)) 
                 return;
-            }
+            
+            if (mOnlyAnimateOnFling && !mIsFlingEvent) 
+            	return;
+            
+            if (mMaxVelocity > MAX_VELOCITY_OFF && mMaxVelocity < getVelocity()) 
+            	return;
 
             ViewPropertyAnimator animator = com.nineoldandroids.view.ViewPropertyAnimator
                     .animate(item)
@@ -142,10 +199,14 @@ public class JazzyHelper implements AbsListView.OnScrollListener {
         switch(scrollState) {
             case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:
                 mIsScrolling = false;
+				mIsFlingEvent = false;
                 break;
             case AbsListView.OnScrollListener.SCROLL_STATE_FLING:
+				mIsFlingEvent = true;
+				break;
             case AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
                 mIsScrolling = true;
+				mIsFlingEvent = false;
                 break;
             default: break;
         }
@@ -179,6 +240,14 @@ public class JazzyHelper implements AbsListView.OnScrollListener {
 
     public void setShouldOnlyAnimateNewItems(boolean onlyAnimateNew) {
         mOnlyAnimateNewItems = onlyAnimateNew;
+    }
+    
+    public void setShouldOnlyAnimateFling(boolean onlyFling) {
+    	mOnlyAnimateOnFling = onlyFling;
+    }
+    
+    public void setMaxAnimationVelocity(int itemsPerSecond) {
+    	mMaxVelocity = itemsPerSecond;
     }
 
     /**

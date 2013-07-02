@@ -20,5 +20,7 @@
         </attr>
         
         <attr name="only_animate_new_items" format="boolean" />
+        <attr name="only_animate_fling" format="boolean" />
+        <attr name="max_velocity" format="integer" />
     </declare-styleable>
 </resources>
