@@ -51,18 +51,17 @@ public class JazzyHelper implements AbsListView.OnScrollListener {
     private boolean mIsScrolling = false;
     private int mFirstVisibleItem = -1;
     private int mLastVisibleItem = -1;
-    
-	private int mPreviousFirstVisibleItem = 0;
-	private long mPreviousEventTime = 0;
-	private double mSpeed = 0;
-	private int mMaxVelocity = 0;
-	public int MAX_VELOCITY_OFF = 0;
+    private int mPreviousFirstVisibleItem = 0;
+    private long mPreviousEventTime = 0;
+    private double mSpeed = 0;
+    private int mMaxVelocity = 0;
+    public static final int MAX_VELOCITY_OFF = 0;
 
     private AbsListView.OnScrollListener mAdditionalOnScrollListener;
 
     private boolean mOnlyAnimateNewItems;
-	private boolean mOnlyAnimateOnFling;
-	private boolean mIsFlingEvent;
+    private boolean mOnlyAnimateOnFling;
+    private boolean mIsFlingEvent;
     private final HashSet<Integer> mAlreadyAnimatedItems;
 
     public JazzyHelper(Context context, AttributeSet attrs) {
@@ -94,7 +93,7 @@ public class JazzyHelper implements AbsListView.OnScrollListener {
 
         int lastVisibleItem = firstVisibleItem + visibleItemCount - 1;
         if (mIsScrolling && shouldAnimateItems) {
-			setVelocity(firstVisibleItem, totalItemCount);
+            setVelocity(firstVisibleItem, totalItemCount);
             int indexAfterFirst = 0;
             while (firstVisibleItem + indexAfterFirst < mFirstVisibleItem) {
                 View item = view.getChildAt(indexAfterFirst);
@@ -120,44 +119,44 @@ public class JazzyHelper implements AbsListView.OnScrollListener {
         notifyAdditionalScrollListener(view, firstVisibleItem, visibleItemCount, totalItemCount);
     }
 
-	/**
-	 * Should be called in onScroll to keep take of current Velocity
-	 * 
-	 * @param firstVisibleItem
-	 *            The index of the first visible item in the ListView.
-	 */
-	private void setVelocity(int firstVisibleItem, int totalItemCount) {
-		if(mMaxVelocity > MAX_VELOCITY_OFF && mPreviousFirstVisibleItem != firstVisibleItem) {
-			long currTime = System.currentTimeMillis();
-			long timeToScrollOneItem = currTime - mPreviousEventTime;
-			if(timeToScrollOneItem < 1) {
-				double newSpeed = (((double)1 / timeToScrollOneItem) * 1000);
-				// We need to normalize velocity so different size item don't 
-				// give largely different velocities.
-				if(newSpeed < (0.9f * mSpeed)) {
-					mSpeed *= 0.9f;
-				} else if(newSpeed > (1.1f * mSpeed)) {
-					mSpeed *= 1.1f;
-				} else {
-					mSpeed = newSpeed;
-				}
-			} else {
-				mSpeed = (((double)1 / timeToScrollOneItem) * 1000);
-			}
+    /**
+     * Should be called in onScroll to keep take of current Velocity.
+     *
+     * @param firstVisibleItem
+     *            The index of the first visible item in the ListView.
+     */
+    private void setVelocity(int firstVisibleItem, int totalItemCount) {
+        if (mMaxVelocity > MAX_VELOCITY_OFF && mPreviousFirstVisibleItem != firstVisibleItem) {
+            long currTime = System.currentTimeMillis();
+            long timeToScrollOneItem = currTime - mPreviousEventTime;
+            if (timeToScrollOneItem < 1) {
+                double newSpeed = ((1.0d / timeToScrollOneItem) * 1000);
+                // We need to normalize velocity so different size item don't
+                // give largely different velocities.
+                if (newSpeed < (0.9f * mSpeed)) {
+                    mSpeed *= 0.9f;
+                } else if (newSpeed > (1.1f * mSpeed)) {
+                    mSpeed *= 1.1f;
+                } else {
+                    mSpeed = newSpeed;
+                }
+            } else {
+                mSpeed = ((1.0d / timeToScrollOneItem) * 1000);
+            }
 
-			mPreviousFirstVisibleItem = firstVisibleItem;
-			mPreviousEventTime = currTime;
-		}
-	}
+            mPreviousFirstVisibleItem = firstVisibleItem;
+            mPreviousEventTime = currTime;
+        }
+    }
 
-	/**
-	 * 
-	 * @return Returns the current Velocity of the ListView's scrolling in items
-	 *         per second.
-	 */
-	private double getVelocity() {
-		return mSpeed;
-	}
+    /**
+     *
+     * @return Returns the current Velocity of the ListView's scrolling in items
+     *         per second.
+     */
+    private double getVelocity() {
+        return mSpeed;
+    }
 
     /**
      * Initializes the item view and triggers the animation.
@@ -168,14 +167,14 @@ public class JazzyHelper implements AbsListView.OnScrollListener {
      */
     private void doJazziness(View item, int position, int scrollDirection) {
         if (mIsScrolling) {
-            if (mOnlyAnimateNewItems && mAlreadyAnimatedItems.contains(position)) 
+            if (mOnlyAnimateNewItems && mAlreadyAnimatedItems.contains(position))
                 return;
-            
-            if (mOnlyAnimateOnFling && !mIsFlingEvent) 
-            	return;
-            
-            if (mMaxVelocity > MAX_VELOCITY_OFF && mMaxVelocity < getVelocity()) 
-            	return;
+
+            if (mOnlyAnimateOnFling && !mIsFlingEvent)
+                return;
+
+            if (mMaxVelocity > MAX_VELOCITY_OFF && mMaxVelocity < getVelocity())
+                return;
 
             ViewPropertyAnimator animator = com.nineoldandroids.view.ViewPropertyAnimator
                     .animate(item)
@@ -199,14 +198,14 @@ public class JazzyHelper implements AbsListView.OnScrollListener {
         switch(scrollState) {
             case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:
                 mIsScrolling = false;
-				mIsFlingEvent = false;
+                mIsFlingEvent = false;
                 break;
             case AbsListView.OnScrollListener.SCROLL_STATE_FLING:
-				mIsFlingEvent = true;
-				break;
+                mIsFlingEvent = true;
+                break;
             case AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
                 mIsScrolling = true;
-				mIsFlingEvent = false;
+                mIsFlingEvent = false;
                 break;
             default: break;
         }
@@ -241,13 +240,13 @@ public class JazzyHelper implements AbsListView.OnScrollListener {
     public void setShouldOnlyAnimateNewItems(boolean onlyAnimateNew) {
         mOnlyAnimateNewItems = onlyAnimateNew;
     }
-    
+
     public void setShouldOnlyAnimateFling(boolean onlyFling) {
-    	mOnlyAnimateOnFling = onlyFling;
+        mOnlyAnimateOnFling = onlyFling;
     }
-    
+
     public void setMaxAnimationVelocity(int itemsPerSecond) {
-    	mMaxVelocity = itemsPerSecond;
+        mMaxVelocity = itemsPerSecond;
     }
 
     /**

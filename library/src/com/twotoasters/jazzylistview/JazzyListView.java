@@ -2,7 +2,6 @@ package com.twotoasters.jazzylistview;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.AbsListView;
 import android.widget.ListView;
 
 public class JazzyListView extends ListView {
@@ -24,9 +23,6 @@ public class JazzyListView extends ListView {
         super.setOnScrollListener(mHelper);
     }
 
-    /**
-     * @see AbsListView#setOnScrollListener
-     */
     @Override
     public final void setOnScrollListener(OnScrollListener l) {
         mHelper.setOnScrollListener(l);
@@ -61,23 +57,23 @@ public class JazzyListView extends ListView {
 
     /**
      * If true animation will only occur when scrolling without the users finger on the screen.
-     * 
+     *
      * @param onlyFlingEvents
      */
     public void setShouldOnlyAnimateFling(boolean onlyFling) {
-    	mHelper.setShouldOnlyAnimateFling(onlyFling);
+        mHelper.setShouldOnlyAnimateFling(onlyFling);
     }
-    
+
     /**
-     * Stop animations after the list has reached a certain velocity. When the list slows down 
-     * it will start animating again. This gives a performance boost as well as preventing 
+     * Stop animations after the list has reached a certain velocity. When the list slows down
+     * it will start animating again. This gives a performance boost as well as preventing
      * the list from animating under the users finger if they suddenly stop it.
-     * 
-     * @param itemsPerSecond, set to JazzyHelper.MAX_VELOCITY_OFF to turn off max velocity. 
+     *
+     * @param itemsPerSecond, set to JazzyHelper.MAX_VELOCITY_OFF to turn off max velocity.
      *        While 13 is a good default, it is dependent on the size of your items.
      */
     public void setMaxAnimationVelocity(int itemsPerSecond) {
-    	mHelper.setMaxAnimationVelocity(itemsPerSecond);
+        mHelper.setMaxAnimationVelocity(itemsPerSecond);
     }
-    
+
 }
