@@ -75,6 +75,7 @@ public class JazzyHelper implements AbsListView.OnScrollListener {
         int maxVelocity = a.getInteger(R.styleable.JazzyListView_max_velocity, MAX_VELOCITY_OFF);
         mOnlyAnimateNewItems = a.getBoolean(R.styleable.JazzyListView_only_animate_new_items, false);
         mOnlyAnimateOnFling = a.getBoolean(R.styleable.JazzyListView_max_velocity, false);
+        mSimulateGridWithList = a.getBoolean(R.styleable.JazzyListView_simulate_grid_with_list, false);
         a.recycle();
 
         setTransitionEffect(transitionEffect);

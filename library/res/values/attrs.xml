@@ -21,6 +21,7 @@
         
         <attr name="only_animate_new_items" format="boolean" />
         <attr name="only_animate_fling" format="boolean" />
+        <attr name="simulate_grid_with_list" format="boolean" />
         <attr name="max_velocity" format="integer" />
     </declare-styleable>
 </resources>
