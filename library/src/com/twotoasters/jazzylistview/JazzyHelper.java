@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AbsListView;
 
@@ -62,6 +63,7 @@ public class JazzyHelper implements AbsListView.OnScrollListener {
     private boolean mOnlyAnimateNewItems;
     private boolean mOnlyAnimateOnFling;
     private boolean mIsFlingEvent;
+    private boolean mSimulateGridWithList;
     private final HashSet<Integer> mAlreadyAnimatedItems;
 
     public JazzyHelper(Context context, AttributeSet attrs) {
@@ -176,18 +178,28 @@ public class JazzyHelper implements AbsListView.OnScrollListener {
             if (mMaxVelocity > MAX_VELOCITY_OFF && mMaxVelocity < getVelocity())
                 return;
 
-            ViewPropertyAnimator animator = com.nineoldandroids.view.ViewPropertyAnimator
-                    .animate(item)
-                    .setDuration(DURATION)
-                    .setInterpolator(new AccelerateDecelerateInterpolator());
-
-            scrollDirection = scrollDirection > 0 ? 1 : -1;
-            mTransitionEffect.initView(item, position, scrollDirection);
-            mTransitionEffect.setupAnimation(item, position, scrollDirection, animator);
-            animator.start();
+            if (mSimulateGridWithList) {
+                ViewGroup itemRow = (ViewGroup) item;
+                for (int i = 0; i < itemRow.getChildCount(); i++)
+                    doJazzinessImpl(itemRow.getChildAt(i), position, scrollDirection);
+            } else {
+                doJazzinessImpl(item, position, scrollDirection);
+            }
 
             mAlreadyAnimatedItems.add(position);
         }
+    }
+
+    private void doJazzinessImpl(View item, int position, int scrollDirection) {
+        ViewPropertyAnimator animator = com.nineoldandroids.view.ViewPropertyAnimator
+                .animate(item)
+                .setDuration(DURATION)
+                .setInterpolator(new AccelerateDecelerateInterpolator());
+
+        scrollDirection = scrollDirection > 0 ? 1 : -1;
+        mTransitionEffect.initView(item, position, scrollDirection);
+        mTransitionEffect.setupAnimation(item, position, scrollDirection, animator);
+        animator.start();
     }
 
     /**
@@ -247,6 +259,10 @@ public class JazzyHelper implements AbsListView.OnScrollListener {
 
     public void setMaxAnimationVelocity(int itemsPerSecond) {
         mMaxVelocity = itemsPerSecond;
+    }
+
+    public void setSimulateGridWithList(boolean simulateGridWithList) {
+        mSimulateGridWithList = simulateGridWithList;
     }
 
     /**

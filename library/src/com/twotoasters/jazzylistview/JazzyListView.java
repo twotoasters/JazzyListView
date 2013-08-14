@@ -76,4 +76,14 @@ public class JazzyListView extends ListView {
         mHelper.setMaxAnimationVelocity(itemsPerSecond);
     }
 
+    /**
+     * Enable this if you are using a list with items that should act like grid items.
+     *
+     * @param simulateGridWithList
+     */
+    public void setSimulateGridWithList(boolean simulateGridWithList) {
+        mHelper.setSimulateGridWithList(simulateGridWithList);
+        setClipChildren(!simulateGridWithList);
+    }
+
 }
