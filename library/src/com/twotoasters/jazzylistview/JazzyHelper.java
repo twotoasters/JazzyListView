@@ -116,7 +116,7 @@ public class JazzyHelper implements AbsListView.OnScrollListener {
         mFirstVisibleItem = firstVisibleItem;
         mLastVisibleItem = lastVisibleItem;
 
-        notifyAdditionalScrollListener(view, firstVisibleItem, visibleItemCount, totalItemCount);
+        notifyAdditionalScrollListenerOnScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
     }
 
     /**
@@ -209,6 +209,7 @@ public class JazzyHelper implements AbsListView.OnScrollListener {
                 break;
             default: break;
         }
+		notifyAdditionalScrollListenerOnScrollStateChanged(view, scrollState);
     }
 
     public void setTransitionEffect(int transitionEffect) {
@@ -252,9 +253,18 @@ public class JazzyHelper implements AbsListView.OnScrollListener {
     /**
      * Notifies the OnScrollListener of an onScroll event, since JazzyListView is the primary listener for onScroll events.
      */
-    private void notifyAdditionalScrollListener(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+    private void notifyAdditionalScrollListenerOnScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         if (mAdditionalOnScrollListener != null) {
             mAdditionalOnScrollListener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
+        }
+    }
+
+    /**
+     * Notifies the OnScrollListener of an onScrollStateChanged event, since JazzyListView is the primary listener for onScrollStateChanged events.
+     */
+    private void notifyAdditionalScrollListenerOnScrollStateChanged(AbsListView view, int scrollState) {
+        if (mAdditionalOnScrollListener != null) {
+            mAdditionalOnScrollListener.onScrollStateChanged(view, scrollState);
         }
     }
 }
