@@ -25,7 +25,7 @@ public class JazzyListView extends ListView {
 
     private JazzyHelper init(Context context, AttributeSet attrs) {
         JazzyHelper helper = new JazzyHelper(context, attrs);
-        super.setOnScrollListener(mHelper);
+        super.setOnScrollListener(helper);
         return helper;
     }
 
