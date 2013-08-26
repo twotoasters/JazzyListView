@@ -9,24 +9,18 @@ public class JazzyGridView extends GridView {
     private final JazzyHelper mHelper;
 
     public JazzyGridView(Context context) {
-        super(context);
-        mHelper = init(context, null);
+        this(context, null);
     }
 
     public JazzyGridView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        mHelper = init(context, attrs);
+        this(context, attrs, 0);
     }
 
     public JazzyGridView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        mHelper = init(context, attrs);
-    }
 
-    private JazzyHelper init(Context context, AttributeSet attrs) {
-        JazzyHelper helper = new JazzyHelper(context, attrs);
+        mHelper = new JazzyHelper(context, attrs);
         super.setOnScrollListener(mHelper);
-        return helper;
     }
 
     /**
