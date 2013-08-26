@@ -116,7 +116,7 @@ public class JazzyHelper implements AbsListView.OnScrollListener {
         mFirstVisibleItem = firstVisibleItem;
         mLastVisibleItem = lastVisibleItem;
 
-        notifyAdditionalScrollListenerOnScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
+        notifyAdditionalOnScrollListener(view, firstVisibleItem, visibleItemCount, totalItemCount);
     }
 
     /**
@@ -209,7 +209,7 @@ public class JazzyHelper implements AbsListView.OnScrollListener {
                 break;
             default: break;
         }
-		notifyAdditionalScrollListenerOnScrollStateChanged(view, scrollState);
+	notifyAdditionalOnScrollStateChangedListener(view, scrollState);
     }
 
     public void setTransitionEffect(int transitionEffect) {
@@ -253,7 +253,7 @@ public class JazzyHelper implements AbsListView.OnScrollListener {
     /**
      * Notifies the OnScrollListener of an onScroll event, since JazzyListView is the primary listener for onScroll events.
      */
-    private void notifyAdditionalScrollListenerOnScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+    private void notifyAdditionalOnScrollListener(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         if (mAdditionalOnScrollListener != null) {
             mAdditionalOnScrollListener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
         }
@@ -262,7 +262,7 @@ public class JazzyHelper implements AbsListView.OnScrollListener {
     /**
      * Notifies the OnScrollListener of an onScrollStateChanged event, since JazzyListView is the primary listener for onScrollStateChanged events.
      */
-    private void notifyAdditionalScrollListenerOnScrollStateChanged(AbsListView view, int scrollState) {
+    private void notifyAdditionalOnScrollStateChangedListener(AbsListView view, int scrollState) {
         if (mAdditionalOnScrollListener != null) {
             mAdditionalOnScrollListener.onScrollStateChanged(view, scrollState);
         }
