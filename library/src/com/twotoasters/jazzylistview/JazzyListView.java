@@ -9,18 +9,24 @@ public class JazzyListView extends ListView {
     private final JazzyHelper mHelper;
 
     public JazzyListView(Context context) {
-        this(context, null);
+        super(context);
+        mHelper = init(context, null);
     }
 
     public JazzyListView(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
+        super(context, attrs);
+        mHelper = init(context, attrs);
     }
 
     public JazzyListView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        mHelper = init(context, attrs);
+    }
 
-        mHelper = new JazzyHelper(context, attrs);
+    private JazzyHelper init(Context context, AttributeSet attrs) {
+        JazzyHelper helper = new JazzyHelper(context, attrs);
         super.setOnScrollListener(mHelper);
+        return helper;
     }
 
     @Override
