@@ -222,7 +222,7 @@ public class JazzyHelper implements AbsListView.OnScrollListener {
                 break;
             default: break;
         }
-	notifyAdditionalOnScrollStateChangedListener(view, scrollState);
+        notifyAdditionalOnScrollStateChangedListener(view, scrollState);
     }
 
     public void setTransitionEffect(int transitionEffect) {
