@@ -9,8 +9,8 @@
 		<version>7</version>
 	</parent>
 
-	<groupId>com.twotoasters</groupId>
-	<artifactId>jazzylistview-parent</artifactId>
+	<groupId>com.twotoasters.jazzylistview</groupId>
+	<artifactId>parent</artifactId>
 	<packaging>pom</packaging>
 	<version>1.0.0-SNAPSHOT</version>
 
