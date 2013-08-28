@@ -25,9 +25,9 @@
 	</modules>
 
 	<scm>
-		<url>https://github.com/TwoToasters/JazzyListView/</url>
-		<connection>scm:git:git://github.com/TwoToasters/JazzyListView.git</connection>
-		<developerConnection>scm:git:git@github.com:TwoToasters/JazzyListView.git</developerConnection>
+		<url>https://github.com/twotoasters/JazzyListView/</url>
+		<connection>scm:git:git://github.com/twotoasters/JazzyListView.git</connection>
+		<developerConnection>scm:git:git@github.com:twotoasters/JazzyListView.git</developerConnection>
 	</scm>
 
 	<licenses>
@@ -70,7 +70,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
-				<version>2.2.1</version>
+				<version>2.4</version>
 				<configuration>
 					<autoVersionSubmodules>false</autoVersionSubmodules>
 				</configuration>
