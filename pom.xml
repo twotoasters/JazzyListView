@@ -27,7 +27,7 @@
 	<scm>
 		<url>https://github.com/twotoasters/JazzyListView/</url>
 		<connection>scm:git:git://github.com/twotoasters/JazzyListView.git</connection>
-		<developerConnection>scm:git:git@github.com:twotoasters/JazzyListView.git</developerConnection>
+		<developerConnection>scm:git:git@github.com/twotoasters/JazzyListView.git</developerConnection>
 	</scm>
 
 	<licenses>
