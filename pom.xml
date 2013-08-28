@@ -12,7 +12,7 @@
 	<groupId>com.twotoasters.jazzylistview</groupId>
 	<artifactId>parent</artifactId>
 	<packaging>pom</packaging>
-	<version>1.0.0</version>
+	<version>1.0.0-SNAPSHOT</version>
 
 	<name>JazzyListView (Parent)</name>
 	<description>Android library for adding animations to list items when they become visible.</description>
