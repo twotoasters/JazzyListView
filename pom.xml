@@ -16,7 +16,7 @@
 
 	<name>JazzyListView (Parent)</name>
 	<description>Android library for adding animations to list items when they become visible.</description>
-	<url>https://github.com/TwoToasters/JazzyListView</url>
+	<url>https://github.com/twotoasters/JazzyListView</url>
 	<inceptionYear>2013</inceptionYear>
 
 	<modules>
@@ -40,7 +40,7 @@
 
 	<issueManagement>
 		<system>GitHub Issues</system>
-		<url>https://github.com/TwoToasters/JazzyListView/issues</url>
+		<url>https://github.com/twotoasters/JazzyListView/issues</url>
 	</issueManagement>
 
 	<properties>
