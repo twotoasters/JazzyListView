@@ -8,6 +8,11 @@ custom effect by implementing a JazzyEffect.
 
 This project was inspired by stroll.js at <http://lab.hakim.se/scroll-effects/>.
 
+Sample App
+==========
+
+The sample app demonstrates all of the pre-built effects on a list and a grid. You can build it from source or install it from the Play Store: <https://play.google.com/store/apps/details?id=com.twotoasters.jazzylistview.sample>
+
 License
 =======
 
