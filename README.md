@@ -1,5 +1,5 @@
 JazzyListView
-=================
+-------------
 
 JazzyListView is an extension of ListView designed to animate list item views as
 they become visible. There are a number of pre-built, bundled effects that can be used
@@ -9,12 +9,31 @@ custom effect by implementing a JazzyEffect.
 This project was inspired by stroll.js at <http://lab.hakim.se/scroll-effects/>.
 
 Sample App
-==========
+----------
 
 The sample app demonstrates all of the pre-built effects on a list and a grid. You can build it from source or install it from the Play Store: <https://play.google.com/store/apps/details?id=com.twotoasters.jazzylistview.sample>
 
+Download
+--------
+
+Grab the APKLIB from Maven central
+
+```xml
+<dependency>
+    <groupId>com.twotoasters.jazzylistview</groupId>
+    <artifactId>library</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+
+or build the AAR yourself with gradle and install into your local Maven repository.
+
+```
+gradle clean install
+```
+
 License
-=======
+-------
 
     Copyright 2013 Two Toasters
 
