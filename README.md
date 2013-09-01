@@ -16,7 +16,7 @@ The sample app demonstrates all of the pre-built effects on a list and a grid. Y
 Download
 --------
 
-Grab the APKLIB from Maven central
+Grab the .apklib from Maven central
 
 ```xml
 <dependency>
@@ -26,7 +26,7 @@ Grab the APKLIB from Maven central
 </dependency>
 ```
 
-or build the AAR yourself with gradle and install into your local Maven repository.
+or build the .aar yourself with gradle and install into your local Maven repository.
 
 ```
 gradle clean install
