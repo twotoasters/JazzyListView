@@ -3,14 +3,18 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.5.+'
+        classpath 'com.android.tools.build:gradle:0.8.+'
     }
 }
 
-allprojects {
-    group = 'com.twotoasters.jazzylistview'
-    version = '1.0.0'
+def isReleaseBuild() {
+    return version.contains("SNAPSHOT") == false
+}
 
+allprojects {
+    group = GROUP
+    version = VERSION_NAME
+    
     repositories {
         mavenCentral()
     }
