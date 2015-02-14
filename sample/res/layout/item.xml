@@ -21,4 +21,5 @@
     android:gravity="center_vertical"
     android:paddingLeft="8dp"
     android:minHeight="@dimen/item_height"
+    android:textColor="@android:color/black"
 />

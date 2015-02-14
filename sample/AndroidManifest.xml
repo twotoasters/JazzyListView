@@ -23,10 +23,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SimpleListActivity"
+            android:name=".ListViewActivity"
             android:label="@string/simple_list_example"/>
         <activity
-            android:name=".SimpleGridActivity"
+            android:name=".GridViewActivity"
             android:label="@string/simple_grid_example" />
     </application>
 

@@ -14,8 +14,8 @@ import java.util.List;
 public class MainActivity extends ListActivity {
 
     private final List<ActivityInfo> activitiesInfo = Arrays.asList(
-            new ActivityInfo(SimpleListActivity.class, R.string.simple_list_example),
-            new ActivityInfo(SimpleGridActivity.class, R.string.simple_grid_example));
+            new ActivityInfo(ListViewActivity.class, R.string.simple_list_example),
+            new ActivityInfo(GridViewActivity.class, R.string.simple_grid_example));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

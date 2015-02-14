@@ -151,14 +151,6 @@ public class JazzyHelper implements AbsListView.OnScrollListener {
         }
     }
 
-    /**
-     *
-     * @return Returns the current Velocity of the ListView's scrolling in items
-     *         per second.
-     */
-    private double getVelocity() {
-        return mSpeed;
-    }
 
     /**
      * Initializes the item view and triggers the animation.
@@ -175,7 +167,7 @@ public class JazzyHelper implements AbsListView.OnScrollListener {
             if (mOnlyAnimateOnFling && !mIsFlingEvent)
                 return;
 
-            if (mMaxVelocity > MAX_VELOCITY_OFF && mMaxVelocity < getVelocity())
+            if (mMaxVelocity > MAX_VELOCITY_OFF && mMaxVelocity < mSpeed)
                 return;
 
             if (mSimulateGridWithList) {

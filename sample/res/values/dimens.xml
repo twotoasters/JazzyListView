@@ -1,4 +1,5 @@
 <resources>
     <dimen name="item_height">48dp</dimen>
     <dimen name="grid_item_height">150dp</dimen>
+    <dimen name="grid_item_spacing">16dp</dimen>
 </resources>
