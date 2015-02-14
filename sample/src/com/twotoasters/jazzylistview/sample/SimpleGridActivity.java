@@ -37,14 +37,14 @@ public class SimpleGridActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        mEffectMap = new HashMap<String, Integer>();
+        mEffectMap = new HashMap<>();
         int i = 0;
         String[] effects = this.getResources().getStringArray(R.array.jazzy_effects);
         for (String effect : effects) {
             mEffectMap.put(effect, i++);
         }
 
-        List<String> effectList = new ArrayList<String>(Arrays.asList(effects));
+        List<String> effectList = new ArrayList<>(Arrays.asList(effects));
         Collections.sort(effectList);
         effectList.remove(getString(R.string.standard));
         effectList.add(0, getString(R.string.standard));

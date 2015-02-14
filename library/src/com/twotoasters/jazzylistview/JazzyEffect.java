@@ -1,8 +1,7 @@
 package com.twotoasters.jazzylistview;
 
 import android.view.View;
-
-import com.nineoldandroids.view.ViewPropertyAnimator;
+import android.view.ViewPropertyAnimator;
 
 /**
  * This interface serves as the contract for a transition effect.

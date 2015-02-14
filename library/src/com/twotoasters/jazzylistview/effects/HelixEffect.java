@@ -1,9 +1,8 @@
 package com.twotoasters.jazzylistview.effects;
 
 import android.view.View;
+import android.view.ViewPropertyAnimator;
 
-import com.nineoldandroids.view.ViewHelper;
-import com.nineoldandroids.view.ViewPropertyAnimator;
 import com.twotoasters.jazzylistview.JazzyEffect;
 
 public class HelixEffect implements JazzyEffect {
@@ -12,12 +11,11 @@ public class HelixEffect implements JazzyEffect {
 
     @Override
     public void initView(View item, int position, int scrollDirection) {
-        ViewHelper.setRotationY(item, INITIAL_ROTATION_ANGLE);
+        item.setRotationY(INITIAL_ROTATION_ANGLE);
     }
 
     @Override
     public void setupAnimation(View item, int position, int scrollDirection, ViewPropertyAnimator animator) {
         animator.rotationYBy(INITIAL_ROTATION_ANGLE * scrollDirection);
     }
-
 }

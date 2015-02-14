@@ -1,16 +1,14 @@
 package com.twotoasters.jazzylistview;
 
-import java.util.HashSet;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewPropertyAnimator;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AbsListView;
 
-import com.nineoldandroids.view.ViewPropertyAnimator;
 import com.twotoasters.jazzylistview.effects.CardsEffect;
 import com.twotoasters.jazzylistview.effects.CurlEffect;
 import com.twotoasters.jazzylistview.effects.FadeEffect;
@@ -26,6 +24,8 @@ import com.twotoasters.jazzylistview.effects.TiltEffect;
 import com.twotoasters.jazzylistview.effects.TwirlEffect;
 import com.twotoasters.jazzylistview.effects.WaveEffect;
 import com.twotoasters.jazzylistview.effects.ZipperEffect;
+
+import java.util.HashSet;
 
 public class JazzyHelper implements AbsListView.OnScrollListener {
 
@@ -67,8 +67,7 @@ public class JazzyHelper implements AbsListView.OnScrollListener {
     private final HashSet<Integer> mAlreadyAnimatedItems;
 
     public JazzyHelper(Context context, AttributeSet attrs) {
-
-        mAlreadyAnimatedItems = new HashSet<Integer>();
+        mAlreadyAnimatedItems = new HashSet<>();
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.JazzyListView);
         int transitionEffect = a.getInteger(R.styleable.JazzyListView_effect, STANDARD);
@@ -192,8 +191,7 @@ public class JazzyHelper implements AbsListView.OnScrollListener {
     }
 
     private void doJazzinessImpl(View item, int position, int scrollDirection) {
-        ViewPropertyAnimator animator = com.nineoldandroids.view.ViewPropertyAnimator
-                .animate(item)
+        ViewPropertyAnimator animator = item.animate()
                 .setDuration(DURATION)
                 .setInterpolator(new AccelerateDecelerateInterpolator());
 
@@ -226,7 +224,6 @@ public class JazzyHelper implements AbsListView.OnScrollListener {
     }
 
     public void setTransitionEffect(int transitionEffect) {
-
         switch (transitionEffect) {
             case STANDARD: setTransitionEffect(new StandardEffect()); break;
             case GROW: setTransitionEffect(new GrowEffect()); break;
