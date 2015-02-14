@@ -1,4 +1,4 @@
-apply plugin: 'android-library'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion Integer.parseInt(project.ANDROID_BUILD_SDK_VERSION)
@@ -23,8 +23,8 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:19.0.0'
     compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.android.support:support-v4:21.0.0'
 }
 
 apply from: 'https://raw.github.com/twotoasters/gradle-mvn-push/master/gradle-mvn-push.gradle'
