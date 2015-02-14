@@ -24,10 +24,12 @@
         </activity>
         <activity
             android:name=".ListViewActivity"
-            android:label="@string/simple_list_example"/>
+            android:label="@string/listview_example"/>
         <activity
             android:name=".GridViewActivity"
-            android:label="@string/simple_grid_example" />
+            android:label="@string/gridview_example" />
+        <activity
+            android:name=".RecyclerViewActivity" />
     </application>
 
 </manifest>

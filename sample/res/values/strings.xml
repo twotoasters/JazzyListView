@@ -4,8 +4,11 @@
     <string name="app_name">JazzyListView</string>
     
     <string name="standard">Standard</string>
-    <string name="simple_list_example">Simple List Example</string>
-    <string name="simple_grid_example">Simple Grid Example</string>
+    <string name="listview_example">ListView Example</string>
+    <string name="gridview_example">GridView Example</string>
+    <string name="recyclerview_list_example">RecyclerView List Example</string>
+    <string name="recyclerview_grid_example">RecyclerView Grid Example</string>
+    <string name="recyclerview_staggered_grid_example">RecyclerView Staggered Grid Example</string>
 
     <string-array name="jazzy_effects">
         <item>@string/standard</item>
