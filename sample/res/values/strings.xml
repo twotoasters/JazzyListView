@@ -5,6 +5,8 @@
     
     <string name="standard">Standard</string>
     <string name="listview_example">ListView Example</string>
+    <string name="listview_footer_example">ListView Example</string>
+    <string name="listview_dob_example">ListView Example</string>
     <string name="gridview_example">GridView Example</string>
     <string name="recyclerview_list_example">RecyclerView List Example</string>
     <string name="recyclerview_grid_example">RecyclerView Grid Example</string>

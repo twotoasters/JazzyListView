@@ -19,6 +19,8 @@ public class MainActivity extends ListActivity {
 
     private final List<ActivityInfo> activityInfos = Arrays.asList(
             new ActivityInfo(ListViewActivity.class, R.string.listview_example, R.layout.item, false),
+            new ActivityInfo(SimpleListWithHeadersAndFootersActivity.class, R.string.listview_footer_example, R.layout.item, false),
+            new ActivityInfo(SimpleListWithHeadersAndFootersActivity.class, R.string.listview_dob_example, R.layout.item, false),
             new ActivityInfo(GridViewActivity.class, R.string.gridview_example, R.layout.grid_item, false),
             new ActivityInfo(RecyclerViewActivity.class, R.string.recyclerview_list_example, R.layout.item, false),
             new ActivityInfo(RecyclerViewActivity.class, R.string.recyclerview_grid_example, R.layout.grid_item, false),

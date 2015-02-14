@@ -30,6 +30,9 @@
             android:label="@string/gridview_example" />
         <activity
             android:name=".RecyclerViewActivity" />
+        <activity
+                    android:name=".SimpleListWithHeadersAndFootersActivity"
+                    android:label="Issue" />
     </application>
 
 </manifest>
