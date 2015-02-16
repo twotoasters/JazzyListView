@@ -1,8 +1,8 @@
 package com.twotoasters.jazzylistview.effects;
 
 import android.view.View;
+import android.view.ViewPropertyAnimator;
 
-import com.nineoldandroids.view.ViewPropertyAnimator;
 import com.twotoasters.jazzylistview.JazzyEffect;
 
 public class StandardEffect implements JazzyEffect {
@@ -16,5 +16,4 @@ public class StandardEffect implements JazzyEffect {
     public void setupAnimation(View item, int position, int scrollDirection, ViewPropertyAnimator animator) {
         // no op
     }
-
 }

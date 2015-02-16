@@ -1,8 +1,8 @@
 package com.twotoasters.jazzylistview.effects;
 
 import android.view.View;
-import com.nineoldandroids.view.ViewHelper;
-import com.nineoldandroids.view.ViewPropertyAnimator;
+import android.view.ViewPropertyAnimator;
+
 import com.twotoasters.jazzylistview.JazzyEffect;
 import com.twotoasters.jazzylistview.JazzyHelper;
 
@@ -12,12 +12,12 @@ public class TiltEffect implements JazzyEffect {
 
     @Override
     public void initView(View item, int position, int scrollDirection) {
-        ViewHelper.setPivotX(item, item.getWidth() / 2);
-        ViewHelper.setPivotY(item, item.getHeight() / 2);
-        ViewHelper.setScaleX(item, INITIAL_SCALE_FACTOR);
-        ViewHelper.setScaleY(item, INITIAL_SCALE_FACTOR);
-        ViewHelper.setTranslationY(item, item.getHeight() / 2 * scrollDirection);
-        ViewHelper.setAlpha(item, JazzyHelper.OPAQUE / 2);
+        item.setPivotX(item.getWidth() / 2);
+        item.setPivotY(item.getHeight() / 2);
+        item.setScaleX(INITIAL_SCALE_FACTOR);
+        item.setScaleY(INITIAL_SCALE_FACTOR);
+        item.setTranslationY(item.getHeight() / 2 * scrollDirection);
+        item.setAlpha(JazzyHelper.OPAQUE / 2);
     }
 
     @Override
@@ -28,5 +28,4 @@ public class TiltEffect implements JazzyEffect {
             .scaleY(1)
             .alpha(JazzyHelper.OPAQUE);
     }
-
 }

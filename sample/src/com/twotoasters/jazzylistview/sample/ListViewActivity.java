@@ -5,29 +5,27 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
-import com.twotoasters.jazzylistview.JazzyGridView;
+
 import com.twotoasters.jazzylistview.JazzyHelper;
+import com.twotoasters.jazzylistview.JazzyListView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
 
-public class SimpleGridActivity extends Activity {
+public class ListViewActivity extends Activity {
 
     private static final String KEY_TRANSITION_EFFECT = "transition_effect";
 
-    private JazzyGridView mGrid;
-    private HashMap<String, Integer> mEffectMap;
+    private JazzyListView mList;
+    private Map<String, Integer> mEffectMap;
     private int mCurrentTransitionEffect = JazzyHelper.HELIX;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_grid);
-        mGrid = (JazzyGridView) findViewById(android.R.id.list);
-        mGrid.setAdapter(new ListAdapter(this, R.layout.grid_item));
+        setContentView(R.layout.activity_list);
+        mList = (JazzyListView) findViewById(android.R.id.list);
+        mList.setAdapter(new ListAdapter(this, R.layout.item));
 
         if (savedInstanceState != null) {
             mCurrentTransitionEffect = savedInstanceState.getInt(KEY_TRANSITION_EFFECT, JazzyHelper.HELIX);
@@ -37,21 +35,8 @@ public class SimpleGridActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        mEffectMap = new HashMap<String, Integer>();
-        int i = 0;
-        String[] effects = this.getResources().getStringArray(R.array.jazzy_effects);
-        for (String effect : effects) {
-            mEffectMap.put(effect, i++);
-        }
-
-        List<String> effectList = new ArrayList<String>(Arrays.asList(effects));
-        Collections.sort(effectList);
-        effectList.remove(getString(R.string.standard));
-        effectList.add(0, getString(R.string.standard));
-        for (String effect : effectList) {
-            menu.add(effect);
-        }
-
+        mEffectMap = Utils.buildEffectMap(this);
+        Utils.populateEffectMenu(menu, new ArrayList<>(mEffectMap.keySet()), this);
         return true;
     }
 
@@ -71,6 +56,6 @@ public class SimpleGridActivity extends Activity {
 
     private void setupJazziness(int effect) {
         mCurrentTransitionEffect = effect;
-        mGrid.setTransitionEffect(mCurrentTransitionEffect);
+        mList.setTransitionEffect(mCurrentTransitionEffect);
     }
 }

@@ -5,8 +5,8 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="17" />
+        android:minSdkVersion="15"
+        android:targetSdkVersion="21" />
 
     <application
         android:allowBackup="true"
@@ -23,11 +23,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SimpleListActivity"
-            android:label="@string/simple_list_example"/>
+            android:name=".ListViewActivity"
+            android:label="@string/listview_example"/>
         <activity
-            android:name=".SimpleGridActivity"
-            android:label="@string/simple_grid_example" />
+            android:name=".GridViewActivity"
+            android:label="@string/gridview_example" />
+        <activity
+            android:name=".RecyclerViewActivity" />
     </application>
 
 </manifest>

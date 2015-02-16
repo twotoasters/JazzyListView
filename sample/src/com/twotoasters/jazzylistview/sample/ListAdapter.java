@@ -12,13 +12,13 @@ class ListAdapter extends ArrayAdapter<String> {
 
     private final LayoutInflater inflater;
     private final Resources res;
-    private final int itemLayout;
+    private final int itemLayoutRes;
 
-    public ListAdapter(Context context, int itemLayout) {
-        super(context, itemLayout, R.id.text, ListModel.getModel());
+    public ListAdapter(Context context, int itemLayoutRes) {
+        super(context, itemLayoutRes, R.id.text, ListModel.getModel());
         inflater = LayoutInflater.from(context);
         res = context.getResources();
-        this.itemLayout = itemLayout;
+        this.itemLayoutRes = itemLayoutRes;
     }
 
     @Override
@@ -26,15 +26,14 @@ class ListAdapter extends ArrayAdapter<String> {
         ViewHolder holder;
 
         if (convertView == null) {
-            convertView = inflater.inflate(itemLayout, null);
+            convertView = inflater.inflate(itemLayoutRes, null);
             holder = new ViewHolder(convertView);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        int colorResId = position % 2 == 0 ? R.color.even : R.color.odd;
-        holder.text.setBackgroundColor(res.getColor(colorResId));
+        holder.text.setBackgroundColor(res.getColor(Utils.getBackgroundColorRes(position, itemLayoutRes)));
         holder.text.setText(ListModel.getModelItem(position));
 
         return convertView;

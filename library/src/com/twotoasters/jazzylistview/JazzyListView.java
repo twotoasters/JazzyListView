@@ -64,10 +64,10 @@ public class JazzyListView extends ListView {
     /**
      * If true animation will only occur when scrolling without the users finger on the screen.
      *
-     * @param onlyFlingEvents
+     * @param onlyWhenFling
      */
-    public void setShouldOnlyAnimateFling(boolean onlyFling) {
-        mHelper.setShouldOnlyAnimateFling(onlyFling);
+    public void setShouldOnlyAnimateFling(boolean onlyWhenFling) {
+        mHelper.setShouldOnlyAnimateFling(onlyWhenFling);
     }
 
     /**
