@@ -17,4 +17,4 @@ dependencies {
     compile 'com.android.support:support-v4:21.0.0'
 }
 
-apply from: 'https://raw.github.com/twotoasters/gradle-mvn-push/master/gradle-mvn-push.gradle'
+apply from: '../gradle-bintray-push.gradle'

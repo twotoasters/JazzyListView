@@ -19,4 +19,4 @@ dependencies {
     compile project(':library')
 }
 
-apply from: 'https://raw.github.com/twotoasters/gradle-mvn-push/master/gradle-mvn-push.gradle'
+apply from: '../gradle-bintray-push.gradle'
