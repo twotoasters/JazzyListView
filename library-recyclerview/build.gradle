@@ -19,5 +19,4 @@ dependencies {
     compile project(':library')
 }
 
-// TODO: figure out multi-module setup
-//apply from: '../gradle-bintray-push.gradle'
+apply from: '../gradle-bintray-push.gradle'
