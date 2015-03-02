@@ -17,4 +17,6 @@ dependencies {
     compile 'com.android.support:support-v4:21.0.0'
 }
 
-apply from: '../gradle-bintray-push.gradle'
+if (Boolean.parseBoolean(BINTRAY_RELEASE_ENABLED)) {
+    apply from: '../gradle-bintray-push.gradle'
+}

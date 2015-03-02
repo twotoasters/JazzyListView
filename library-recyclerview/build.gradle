@@ -19,4 +19,6 @@ dependencies {
     compile project(':library')
 }
 
-apply from: '../gradle-bintray-push.gradle'
+if (Boolean.parseBoolean(BINTRAY_RELEASE_ENABLED)) {
+    apply from: '../gradle-bintray-push.gradle'
+}
