@@ -31,6 +31,24 @@ or build the .aar yourself with gradle and install into your local Maven reposit
 ```
 gradle clean install
 ```
+Gradle setup
+-------
+Replace version x.x.x with the latest version under releases log
+```gradle
+dependencies{
+       compile 'com.twotoasters.jazzylistview:library:X.X.X'
+}
+```
+
+
+
+Releases log
+-------
+
+
+
+
+
 
 License
 -------
