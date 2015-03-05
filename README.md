@@ -16,26 +16,15 @@ The sample app demonstrates all of the pre-built effects on a list and a grid. Y
 Download
 --------
 
-Grab the .apklib from Maven central
-
-```xml
-<dependency>
-    <groupId>com.twotoasters.jazzylistview</groupId>
-    <artifactId>library</artifactId>
-    <version>1.2.1</version>
-</dependency>
-```
-
-or build the .aar yourself with gradle and install into your local Maven repository.
-
-```
-gradle clean install
+```groovy
+compile 'com.twotoasters.jazzylistview:library:1.2.1'
+compile 'com.twotoasters.jazzylistview:library-recyclerview:1.2.1'
 ```
 
 License
 -------
 
-    Copyright 2013 Two Toasters
+    Copyright 2015 Two Toasters
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
