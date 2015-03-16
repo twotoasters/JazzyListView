@@ -60,7 +60,7 @@ public class JazzyHelper implements AbsListView.OnScrollListener {
     public static final int TWIRL = 13;
     public static final int SLIDE_IN = 14;
 
-    public static final int DURATION = 600;
+    public static final int DURATION = 300;
     public static final int OPAQUE = 255, TRANSPARENT = 0;
 
     private JazzyEffect mTransitionEffect = null;
