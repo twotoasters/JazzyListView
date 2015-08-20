@@ -54,13 +54,16 @@ RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list);
 3) Set the JazzyScrollListener (you can set an additional scroll listener on the JazzyScrollListener)
 
 ```java
-recyclerView.setOnScrollListener(new JazzyRecyclerViewScrollListener());
+JazzyRecyclerViewScrollListener jazzyScrollListener = new JazzyRecyclerViewScrollListener();
+recyclerView.setOnScrollListener(jazzyScrollListener);
 ```
+
+NOTE: On new versions of the support library `setOnScrollListener()` has been deprecated for `addOnScrollListener()`
 
 4) Set your effect
 
 ```java
-recyclerView.setTransitionEffect(new SlideInEffect());
+jazzyScrollListener.setTransitionEffect(new SlideInEffect());
 ```
 
 Sample App
