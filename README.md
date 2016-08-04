@@ -75,6 +75,24 @@ Download
 compile 'com.twotoasters.jazzylistview:library:1.2.1'
 compile 'com.twotoasters.jazzylistview:library-recyclerview:1.2.1'
 ```
+Gradle setup
+-------
+Replace version x.x.x with the latest version under releases log
+```gradle
+dependencies{
+       compile 'com.twotoasters.jazzylistview:library:X.X.X'
+}
+```
+
+
+
+Releases log
+-------
+
+
+
+
+
 
 License
 -------
